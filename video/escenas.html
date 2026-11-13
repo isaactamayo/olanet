@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1280px;height:720px;overflow:hidden;font-family:"Liberation Sans","DejaVu Sans","Noto Color Emoji",sans-serif;color:#222;
+ background:linear-gradient(#f3ece0 0,#f3ece0 560px,#cbb38f 560px,#b99d76 720px)}
+.abs{position:absolute}
+/* decorado */
+#board{left:330px;top:70px;width:620px;height:150px;background:#fff;border:6px solid #9aa3ad;border-radius:6px;opacity:.55}
+#board span{position:absolute;font-family:"DejaVu Sans Mono";color:#3a6ea5;font-size:20px}
+#plant{left:1000px;top:470px;font-size:80px;opacity:.9}
+#topbar{left:0;top:0;width:1280px;height:52px;background:#1f1b2e;color:#ffd447;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:24px;font-weight:bold;z-index:5}
+#topbar .rec{color:#ff5a5a}
+/* personajes */
+#pm{left:30px;bottom:10px;width:230px;height:340px;z-index:2}
+#cl{right:40px;bottom:70px;width:190px;height:230px;z-index:2}
+.tag{position:absolute;font-size:18px;font-weight:bold;background:#1f1b2e;color:#fff;padding:3px 10px;border-radius:8px;white-space:nowrap}
+/* escenas */
+.scene{position:absolute;inset:0;display:none;z-index:3}
+.bubble{position:absolute;background:#fff;border:3px solid #222;border-radius:22px;padding:14px 20px;font-size:26px;line-height:1.28;max-width:480px;box-shadow:4px 5px 0 rgba(0,0,0,.18)}
+.bubble b.who{display:block;font-size:15px;letter-spacing:1px;text-transform:uppercase;color:#777;margin-bottom:3px}
+.bubble.pm{left:36px;top:70px;transform-origin:15% 120%}
+.bubble.pm::after{content:"";position:absolute;left:70px;bottom:-26px;border:13px solid transparent;border-top:15px solid #222}
+.bubble.cl{right:36px;top:70px;background:#fff1e8;border-color:#c45f3e;transform-origin:85% 120%}
+.bubble.cl b.who{color:#c45f3e}
+.bubble.cl::after{content:"";position:absolute;right:80px;bottom:-26px;border:13px solid transparent;border-top:15px solid #c45f3e}
+.bubble.client{background:#eaf4ff;border-color:#2a64b0}
+.bubble.client b.who{color:#2a64b0}
+.panel{position:absolute;background:#fff;border:3px solid #222;border-radius:14px;padding:16px 20px;box-shadow:6px 7px 0 rgba(0,0,0,.18)}
+.panel h3{margin:0 0 12px;font-size:24px}
+.ghost{visibility:hidden}
+.stamp{position:absolute;border:6px solid #d62828;color:#d62828;font-weight:900;font-size:52px;padding:4px 18px;border-radius:10px;letter-spacing:3px;background:rgba(255,255,255,.75)}
+/* gantt */
+.grow{display:flex;align-items:center;height:52px;font-size:19px;border-bottom:1px dashed #ddd}
+.grow .lb{width:250px;flex:none}
+.grow .tr{flex:1;height:26px;position:relative}
+.grow .bar{position:absolute;top:0;height:26px;border-radius:6px}
+/* calendario */
+.mt{display:flex;gap:14px;font-size:21px;padding:6px 0;border-bottom:1px solid #eee;position:relative}
+.mt .h{color:#2a64b0;font-weight:bold;width:62px;font-family:"DejaVu Sans Mono";font-size:18px;padding-top:3px}
+.mt.struck::after{content:"";position:absolute;left:0;right:0;top:50%;height:4px;background:#d62828;border-radius:2px}
+.mt.struck{color:#aaa}
+/* semáforo */
+.st{display:flex;align-items:center;justify-content:space-between;font-size:28px;padding:10px 4px;border-bottom:1px solid #eee}
+.light{width:44px;height:44px;border-radius:50%;background:#2fb84b;border:3px solid #1b6d2c}
+.light.alt{background:#e63946;border-color:#8c1c24}
+/* bingo */
+.bingo{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.cell{height:96px;border:3px solid #222;border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:21px;font-weight:bold;position:relative;background:#fffbe6}
+.cell .x{position:absolute;inset:6px;border:6px solid rgba(214,40,40,.85);border-radius:50%;display:none}
+.cell.on .x{display:block}
+.cell.on{background:#ffe1e1}
+.check{font-size:28px;padding:8px 0}
+.check i{font-style:normal;color:#2fb84b;font-weight:900;margin-right:10px}
+/* cards */
+.card{background:#1f1b2e;color:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:8}
+.card .big{font-size:62px;font-weight:900;color:#ffd447;line-height:1.1;max-width:1100px}
+.card .mid{font-size:38px;margin-top:14px;max-width:1050px;line-height:1.25}
+.card .small{font-size:26px;color:#bbb;margin-top:18px}
+#fade{position:absolute;inset:0;background:#000;z-index:20;pointer-events:none}
+</style></head><body>
+<div id="stage">
+ <div id="board" class="abs"><span style="left:20px;top:14px">OKRs Q4 → ???</span><span style="left:20px;top:52px">Sinergias ✓ ✓ ✓</span><span style="left:300px;top:30px">KPI ↑↑ (ojalá)</span><span style="left:300px;top:80px">Go-live: ¿2029?</span></div>
+ <div id="topbar" class="abs"><span id="clock">09:00 · Lunes</span><span>PROYECTO «TRANSFORMACIÓN 360º» <span class="rec">● REC</span></span></div>
+
+ <!-- PM -->
+ <div id="pm" class="abs">
+  <svg viewBox="0 0 230 340" width="230" height="340">
+   <rect x="78" y="250" width="28" height="85" fill="#2b2f45"/><rect x="122" y="250" width="28" height="85" fill="#2b2f45"/>
+   <rect x="68" y="325" width="42" height="14" rx="6" fill="#111"/><rect x="118" y="325" width="42" height="14" rx="6" fill="#111"/>
+   <path d="M55 155 Q114 125 173 155 L170 265 L58 265 Z" fill="#35406b"/>
+   <path d="M95 140 L114 200 L133 140 Z" fill="#fff"/>
+   <path d="M109 150 L119 150 L123 205 L114 218 L105 205 Z" fill="#d62828"/>
+   <g id="pmArm"><path d="M168 160 Q205 190 185 215" stroke="#35406b" stroke-width="22" fill="none" stroke-linecap="round"/>
+    <g id="pmCup"><rect x="170" y="200" width="34" height="40" rx="5" fill="#fff" stroke="#222" stroke-width="3"/><path d="M204 210 Q218 220 204 230" stroke="#222" stroke-width="3" fill="none"/><text x="173" y="230" font-size="14" font-weight="bold" fill="#8b4513">PM</text></g></g>
+   <path d="M60 160 Q35 200 55 240" stroke="#35406b" stroke-width="22" fill="none" stroke-linecap="round"/>
+   <circle cx="114" cy="85" r="55" fill="#f1c27d" stroke="#c99a5b" stroke-width="2"/>
+   <path d="M60 78 Q65 25 115 28 Q165 25 168 78 Q150 50 115 55 Q80 50 60 78 Z" fill="#4a3426"/>
+   <circle cx="94" cy="88" r="15" fill="none" stroke="#222" stroke-width="3"/><circle cx="134" cy="88" r="15" fill="none" stroke="#222" stroke-width="3"/><line x1="109" y1="88" x2="119" y2="88" stroke="#222" stroke-width="3"/>
+   <circle id="pmEyeL" cx="94" cy="89" r="4" fill="#222"/><circle id="pmEyeR" cx="134" cy="89" r="4" fill="#222"/>
+   <ellipse id="pmMouth" cx="114" cy="118" rx="12" ry="3" fill="#7a2e2e"/>
+   <path id="pmSweat" d="M160 60 Q168 75 160 82 Q152 75 160 60 Z" fill="#6ec6ff" opacity="0"/>
+  </svg>
+  <div class="tag" style="left:55px;bottom:-4px">Javi · PM Senior</div>
+ </div>
+ <!-- Claude -->
+ <div id="cl" class="abs">
+  <svg viewBox="0 0 190 200" width="190" height="200">
+   <ellipse cx="95" cy="190" rx="60" ry="8" fill="rgba(0,0,0,.15)"/>
+   <rect x="15" y="15" width="160" height="150" rx="48" fill="#d97757" stroke="#a5492c" stroke-width="4"/>
+   <ellipse cx="65" cy="80" rx="16" ry="20" fill="#fff"/><ellipse cx="125" cy="80" rx="16" ry="20" fill="#fff"/>
+   <circle id="clEyeL" cx="68" cy="83" r="8" fill="#222"/><circle id="clEyeR" cx="128" cy="83" r="8" fill="#222"/>
+   <ellipse id="clMouth" cx="95" cy="125" rx="18" ry="5" fill="#5a1f0f"/>
+   <circle cx="42" cy="112" r="9" fill="#f29a7c"/><circle cx="148" cy="112" r="9" fill="#f29a7c"/>
+  </svg>
+  <div class="tag" style="left:50px;bottom:-10px;background:#a5492c">Claude · IA</div>
+ </div>
+
+ <!-- 0 TÍTULO -->
+ <div class="scene card" data-start="0" data-dur="6" data-chars="no">
+  <div class="big pop" data-in="0.3">Cómo una IA le quitó el trabajo<br>a un PM de consultoría</div>
+  <div class="mid pop" data-in="1.6">(en 15 minutos. Un lunes. Antes del café.)</div>
+  <div class="small pop" data-in="3">Una tragicomedia en 6 actos 🎭</div>
+ </div>
+
+ <!-- 1 GANTT -->
+ <div class="scene" data-start="6" data-dur="13" data-clock="09:00 · Lunes">
+  <div class="bubble pm" data-in="0.4" data-out="5"><b class="who">Javi</b><span class="type" data-who="pm">Bueno, lo primero: actualizar el Gantt. Esto me lleva toda la mañana.</span></div>
+  <div class="panel pop" data-in="5.2" style="left:300px;top:250px;width:690px">
+   <h3>📊 Plan de proyecto (actualizado hace 0,3 s)</h3>
+   <div class="grow"><span class="lb">1. Kick-off</span><div class="tr"><div class="bar" data-grow="5.6,6.0" data-x="0" data-w="18" style="background:#4c9be8"></div></div></div>
+   <div class="grow"><span class="lb">2. Re-kick-off</span><div class="tr"><div class="bar" data-grow="5.8,6.2" data-x="15" data-w="18" style="background:#4c9be8"></div></div></div>
+   <div class="grow"><span class="lb">3. Análisis del análisis</span><div class="tr"><div class="bar" data-grow="6.0,6.4" data-x="30" data-w="40" style="background:#f4a259"></div></div></div>
+   <div class="grow"><span class="lb">4. Go-live (ojalá)</span><div class="tr"><div class="bar" data-grow="6.2,6.6" data-x="68" data-w="12" style="background:#2fb84b"></div></div></div>
+   <div class="grow"><span class="lb">5. Hipercuidado</span><div class="tr"><div class="bar" data-grow="6.4,6.8" data-x="78" data-w="22" style="background:#e63946"></div></div></div>
+   <div class="grow" style="border:0"><span class="lb">6. Tu boda 💍</span><div class="tr"><div class="bar" data-grow="6.6,7.0" data-x="90" data-w="10" style="background:#b56ce8"></div></div></div>
+  </div>
+  <div class="bubble cl" data-in="5.0" data-out="12.6"><b class="who">Claude</b><span class="type" data-who="cl">Hecho. He actualizado también el de 2027, el de 2028 y el de tu boda.</span></div>
+  <div class="bubble pm" data-in="9.6" data-out="12.6" style="top:250px;left:30px;font-size:30px"><span class="type" data-who="pm" data-cps="6">...vale.</span></div>
+ </div>
+
+ <!-- 2 REUNIONES -->
+ <div class="scene" data-start="19" data-dur="14" data-clock="09:04 · Agenda del día">
+  <div class="panel pop" data-in="0.2" style="left:300px;top:240px;width:600px">
+   <h3>📅 Hoy · <span data-count="5.2,6.6,47,0">47</span> reuniones</h3>
+   <div class="mt" data-strike="5.3"><span class="h">09:00</span>Daily</div>
+   <div class="mt" data-strike="5.5"><span class="h">09:15</span>Pre-daily (para preparar la daily)</div>
+   <div class="mt" data-strike="5.7"><span class="h">10:00</span>Sync del sync</div>
+   <div class="mt" data-strike="5.9"><span class="h">11:00</span>Reunión para preparar el Comité</div>
+   <div class="mt" data-strike="6.1"><span class="h">12:00</span>Comité</div>
+   <div class="mt" data-strike="6.3"><span class="h">13:00</span>Post-mortem del Comité</div>
+   <div class="mt" data-strike="6.5" style="border:0"><span class="h">17:30</span>Café para «alinear expectativas»</div>
+  </div>
+  <div class="bubble cl" data-in="1.2" data-out="8.4"><b class="who">Claude</b><span class="type" data-who="cl">He asistido a las 47 a la vez. Resumen: nadie decidió nada.</span></div>
+  <div class="bubble pm" data-in="8.0" data-out="13.6"><b class="who">Javi</b><span class="type" data-who="pm">¿Y el acta?</span></div>
+  <div class="bubble cl" data-in="9.0" data-out="13.6"><b class="who">Claude</b><span class="type" data-who="cl">En tu correo. Ocupa una línea: «Seguimos».</span></div>
+ </div>
+
+ <!-- 3 SANDÍA -->
+ <div class="scene" data-start="33" data-dur="14" data-clock="09:07 · Status report al cliente">
+  <div class="panel pop" data-in="0.2" style="left:330px;top:250px;width:440px">
+   <h3>🚦 Estado del proyecto</h3>
+   <div class="st">Alcance <span class="light" data-swap="7.4"></span></div>
+   <div class="st">Plazo <span class="light" data-swap="7.6"></span></div>
+   <div class="st">Presupuesto <span class="light" data-swap="7.8"></span></div>
+   <div class="st" style="border:0">Moral del equipo <span class="light" data-swap="8.0"></span></div>
+  </div>
+  <div class="bubble pm" data-in="0.6" data-out="4.6"><b class="who">Javi</b><span class="type" data-who="pm">Lo ponemos todo en verde. Como siempre.</span></div>
+  <div class="bubble cl" data-in="4.4" data-out="10.4"><b class="who">Claude</b><span class="type" data-who="cl">Lo he revisado: es un proyecto sandía. Verde por fuera… rojo por dentro.</span></div>
+  <div class="abs pop" data-in="7.0" style="left:790px;top:330px;font-size:150px">🍉</div>
+  <div class="bubble pm" data-in="10.2" data-out="13.6" data-shake="10.2,13.6"><b class="who">Javi</b><span class="type" data-who="pm">¡¡Shhh!! ¡Que te oye el Partner!</span></div>
+ </div>
+
+ <!-- 4 CAMBIO DE ALCANCE -->
+ <div class="scene" data-start="47" data-dur="15" data-clock="09:10 · Llama el cliente">
+  <div class="abs pop" data-in="0.1" data-shake="0.1,1.6" style="left:330px;top:280px;font-size:120px">📞</div>
+  <div class="bubble client" data-in="0.9" data-out="6.6" style="left:300px;top:70px;max-width:640px;transform-origin:20% 120%"><b class="who">El cliente</b><span class="type" data-who="none">Un cambio pequeñito, ¿eh? Sin impacto: que la app también haga la declaración de la renta.</span></div>
+  <div class="bubble pm" data-in="6.6" data-out="9.4"><b class="who">Javi</b><span class="type" data-who="pm" data-cps="14">Eeeh... lo vemos y...</span></div>
+  <div class="panel pop" data-in="8.6" style="left:480px;top:250px;width:440px;font-size:22px;line-height:1.5">
+   <h3>📄 Change Request #84</h3>
+   <div>Petición: «cambio pequeñito»</div>
+   <div>Impacto plazo: <b>+3 meses</b></div>
+   <div>Impacto coste: <b>+<span data-count="9.0,10.2,0,120000">0</span> €</b></div>
+   <div>Generado en: <b>0,4 s</b></div>
+  </div>
+  <div class="bubble cl" data-in="8.4" data-out="14.6"><b class="who">Claude</b><span class="type" data-who="cl">Change Request enviado. Con anexo, firma y factura.</span></div>
+  <div class="stamp pop" data-in="11.2" data-rot="-12" style="left:610px;top:470px">FIRMADO</div>
+  <div class="bubble client" data-in="12.0" data-out="14.6" style="left:300px;top:470px;transform-origin:20% 0"><b class="who">El cliente</b><span class="type" data-who="none" data-cps="6">...vale.</span></div>
+ </div>
+
+ <!-- 5 BINGO -->
+ <div class="scene" data-start="62" data-dur="15" data-clock="09:12 · Comité de Dirección">
+  <div class="panel pop" data-in="0.2" style="left:345px;top:250px;width:560px">
+   <h3>🎯 Bingo de consultoría</h3>
+   <div class="bingo">
+    <div class="cell" data-word="alinear" data-src="b5">Alinear<span class="x"></span></div>
+    <div class="cell" data-word="sinergias" data-src="b5">Sinergias<span class="x"></span></div>
+    <div class="cell">Bajar a tierra<span class="x"></span></div>
+    <div class="cell" data-word="poner en valor" data-src="b5">Poner en valor<span class="x"></span></div>
+    <div class="cell" data-word="quick win" data-src="b5">Quick win<span class="x"></span></div>
+    <div class="cell" data-word="deep dive" data-src="b5">Deep dive<span class="x"></span></div>
+    <div class="cell">Low-hanging fruit<span class="x"></span></div>
+    <div class="cell" data-word="holístico" data-src="b5">Holístico<span class="x"></span></div>
+    <div class="cell" data-word="stakeholders" data-src="b5">Stake&shy;holders<span class="x"></span></div>
+   </div>
+  </div>
+  <div class="bubble pm" data-in="0.8" data-out="8.6" style="max-width:560px"><b class="who">Javi</b><span class="type" id="b5" data-who="pm" data-cps="20">Debemos alinear sinergias, poner en valor el quick win y hacer un deep dive holístico con los stakeholders.</span></div>
+  <div class="stamp pop" data-in="6.6" data-rot="-8" style="left:480px;top:400px;font-size:84px">¡BINGO!</div>
+  <div class="bubble cl" data-in="8.6" data-out="14.6"><b class="who">Claude · traducción simultánea</b><span class="type" data-who="cl">«No tenemos ni idea, pero con mucha seguridad».</span></div>
+ </div>
+
+ <!-- 6 CRISIS -->
+ <div class="scene" data-start="77" data-dur="17" data-clock="09:15 · Crisis existencial">
+  <div class="bubble pm" data-in="0.3" data-out="3.8"><b class="who">Javi</b><span class="type" data-who="pm">Vale... ¿y entonces yo qué hago?</span></div>
+  <div class="bubble cl" data-in="3.6" data-out="16.6"><b class="who">Claude</b><span class="type" data-who="cl">Tranquilo. Hay cosas que una IA nunca podrá hacer:</span></div>
+  <div class="panel pop" data-in="5.6" style="left:300px;top:250px;width:660px">
+   <div class="check pop" data-in="6.2"><i>✔</i>Ir a la comida con el cliente 🍷</div>
+   <div class="check pop" data-in="7.6"><i>✔</i>Decir «esto lo hablamos offline»</div>
+   <div class="check pop" data-in="9.0"><i>✔</i>Comerse la bronca del Partner</div>
+   <div class="check pop" data-in="10.4"><i>✔</i>Llorar en el baño los viernes 😭</div>
+  </div>
+  <div class="bubble pm" data-in="12.6" data-out="16.6" style="top:230px;left:30px;max-width:260px"><span class="type" data-who="pm" data-cps="12">...me quedo con la comida.</span></div>
+ </div>
+
+ <!-- 7 MORALEJA -->
+ <div class="scene card" data-start="94" data-dur="9" data-chars="no">
+  <div class="big pop" data-in="0.3">Moraleja</div>
+  <div class="mid pop" data-in="1.2">La IA no le va a quitar el trabajo al PM.</div>
+  <div class="mid pop" data-in="3.0">Le va a quitar <b style="color:#ffd447">las reuniones</b>.</div>
+  <div class="small pop" data-in="5.2" style="font-size:30px;color:#fff">…y nadie sabe qué hace un PM sin reuniones. 😶</div>
+ </div>
+
+ <!-- 8 CRÉDITOS -->
+ <div class="scene card" data-start="103" data-dur="7" data-chars="no">
+  <div class="mid pop" data-in="0.3">Ningún PM resultó herido durante la grabación de este vídeo.</div>
+  <div class="small pop" data-in="2.0">(Bueno, uno lloró un poco. Era viernes.)</div>
+  <div class="small pop" data-in="3.6" style="color:#d97757;font-size:30px;font-weight:bold">Hecho con Claude · 100% libre de Gantts</div>
+ </div>
+
+ <div id="fade"></div>
+</div>
+<script>
+const TOTAL=110;
+const $=(s,r=document)=>[...r.querySelectorAll(s)];
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const easeOutBack=x=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const scenes=$('.scene').map(el=>({el,start:+el.dataset.start,dur:+el.dataset.dur,chars:el.dataset.chars!=='no',clock:el.dataset.clock,card:el.classList.contains('card')}));
+// timing helpers: an element's in-time = own data-in or nearest ancestor's
+function tin(el){let e=el;while(e&&!e.classList.contains('scene')){if(e.dataset.in!==undefined)return +e.dataset.in;e=e.parentElement}return 0}
+$('.type').forEach(el=>{const full=el.textContent;el.dataset.full=full;el.innerHTML='<span class="v"></span><span class="ghost">'+full.replace(/</g,'&lt;')+'</span>';
+ el._tin=tin(el)+0.3;el._cps=+(el.dataset.cps||24);el._dur=full.length/el._cps});
+const EVENTS=[];
+scenes.forEach(s=>{
+ EVENTS.push({t:s.start,k:'whoosh'});
+ $('[data-in]',s.el).forEach(el=>EVENTS.push({t:s.start+(+el.dataset.in),k:el.classList.contains('stamp')?'stamp':'pop'}));
+ $('.type',s.el).forEach(el=>EVENTS.push({t:s.start+el._tin,t1:s.start+el._tin+el._dur,k:'type',who:el.dataset.who}));
+ $('[data-strike]',s.el).forEach(el=>EVENTS.push({t:s.start+(+el.dataset.strike),k:'strike'}));
+ $('[data-swap]',s.el).forEach(el=>EVENTS.push({t:s.start+(+el.dataset.swap),k:'swap'}));
+ $('[data-shake]',s.el).forEach(el=>{const[a,b]=el.dataset.shake.split(',').map(Number);EVENTS.push({t:s.start+a,t1:s.start+b,k:el.textContent.includes('📞')?'ring':'shake'})});
+});
+window.EVENTS=EVENTS;window.TOTAL=TOTAL;
+function render(t){
+ let act=scenes.find(s=>t>=s.start&&t<s.start+s.dur)||scenes[scenes.length-1];
+ const lt=t-act.start;
+ scenes.forEach(s=>s.el.style.display=s===act?(s.card?'flex':'block'):'none');
+ const showChars=act.chars;
+ ['pm','cl','board','topbar'].forEach(id=>document.getElementById(id).style.display=showChars?'block':'none');
+ document.getElementById('topbar').style.display=showChars?'flex':'none';
+ if(act.clock)document.getElementById('clock').textContent=act.clock;
+ // fades
+ const f=Math.max(clamp(1-lt/0.3),clamp(1-(act.dur-lt)/0.3));
+ document.getElementById('fade').style.opacity=(t<0.3||act!==scenes[scenes.length-1]||true)?f*0.9:0;
+ // appear / disappear
+ $('[data-in]',act.el).forEach(el=>{
+  const a=+el.dataset.in,b=el.dataset.out!==undefined?+el.dataset.out:1e9;
+  let s=0,o=0;
+  if(lt>=a){const p=clamp((lt-a)/0.35);s=easeOutBack(p);o=clamp((lt-a)/0.15)}
+  if(lt>b){const q=clamp((lt-b)/0.25);o*=1-q;s*=1-q*0.3}
+  let tr=`scale(${s.toFixed(4)})`;
+  if(el.dataset.rot)tr+=` rotate(${el.dataset.rot}deg)`;
+  if(el.dataset.shake){const[x,y]=el.dataset.shake.split(',').map(Number);if(lt>=x&&lt<=y){tr=`translate(${(Math.sin(lt*70)*7).toFixed(2)}px,${(Math.cos(lt*55)*3).toFixed(2)}px) `+tr}}
+  el.style.transform=tr;el.style.opacity=o;
+ });
+ // typewriter + talking
+ let talk={pm:false,cl:false};
+ $('.type',act.el).forEach(el=>{
+  const full=el.dataset.full;const n=clamp(Math.floor((lt-el._tin)*el._cps),0,full.length);
+  el.firstChild.textContent=full.slice(0,n);el.lastChild.textContent=full.slice(n);
+  if(n>0&&n<full.length&&el.dataset.who in talk)talk[el.dataset.who]=true;
+ });
+ const pmM=document.getElementById('pmMouth'),clM=document.getElementById('clMouth');
+ pmM.setAttribute('ry',talk.pm?(4+Math.abs(Math.sin(t*22))*9).toFixed(1):3);
+ clM.setAttribute('ry',talk.cl?(4+Math.abs(Math.sin(t*20))*10).toFixed(1):5);
+ // blink
+ const bl=(t%3.7)<0.12?0.15:1;['pmEyeL','pmEyeR','clEyeL','clEyeR'].forEach(id=>document.getElementById(id).setAttribute('transform-origin','center'));
+ ['clEyeL','clEyeR'].forEach(id=>{const e=document.getElementById(id);e.setAttribute('r',bl<1?2:8)});
+ // claude bob
+ document.getElementById('cl').style.transform=`translateY(${(Math.sin(t*2.2)*7).toFixed(2)}px)`;
+ // PM stress: sweat in later scenes, cup shake
+ const stress=['09:07','09:10','09:12','09:15'].some(k=>(act.clock||'').startsWith(k));
+ document.getElementById('pmSweat').setAttribute('opacity',stress?0.9:0);
+ document.getElementById('pmSweat').setAttribute('transform',`translate(0,${((t*20)%14).toFixed(1)})`);
+ document.getElementById('pmCup').setAttribute('transform',stress?`translate(${(Math.sin(t*40)*2).toFixed(2)},0)`:'');
+ // bars
+ $('[data-grow]',act.el).forEach(el=>{const[a,b]=el.dataset.grow.split(',').map(Number);const p=easeOutBack(clamp((lt-a)/(b-a)));
+  el.style.left=el.dataset.x+'%';el.style.width=(Math.max(0,p)*el.dataset.w)+'%'});
+ $('[data-count]',act.el).forEach(el=>{const[a,b,f0,f1]=el.dataset.count.split(',').map(Number);const p=clamp((lt-a)/(b-a));
+  el.textContent=Math.round(f0+(f1-f0)*p).toLocaleString('es-ES')});
+ $('[data-strike]',act.el).forEach(el=>el.classList.toggle('struck',lt>=+el.dataset.strike));
+ $('[data-swap]',act.el).forEach(el=>el.classList.toggle('alt',lt>=+el.dataset.swap));
+ $('[data-word]',act.el).forEach(el=>{const src=document.getElementById(el.dataset.src);const vis=src.firstChild.textContent.toLowerCase();el.classList.toggle('on',vis.includes(el.dataset.word))});
+}
+window.render=render;render(0);
+</script></body></html>
