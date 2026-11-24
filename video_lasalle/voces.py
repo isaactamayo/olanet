@@ -1,45 +1,60 @@
-"""Genera las voces de Lucía y Marta con Kokoro (offline) y la línea de tiempo del vídeo.
+"""Genera las voces de Lucía y Marta y la línea de tiempo del vídeo.
 
-Uso: python3 voces.py <dir_modelos> <dir_salida>
-  dir_modelos: contiene kokoro.onnx y voices.bin (github.com/thewh1teagle/kokoro-onnx, model-files-v1.0)
+Uso: [MOTOR=edge|kokoro] python3 voces.py <dir_modelos> <dir_salida>
+  edge (por defecto): voces neuronales de Microsoft vía edge-tts (requiere acceso a speech.platform.bing.com)
+  kokoro: offline; dir_modelos contiene kokoro.onnx y voices.bin (github.com/thewh1teagle/kokoro-onnx, model-files-v1.0)
 Salida: voces.wav (pista de voz), timeline.js (tiempos + apertura de boca por fotograma)
 """
-import json, sys, os, subprocess, tempfile
+import json, sys, os, subprocess, tempfile, asyncio
 import numpy as np, soundfile as sf
-from kokoro_onnx import Kokoro
 
 MOD, OUT = sys.argv[1], sys.argv[2]
+MOTOR = os.environ.get("MOTOR", "edge")  # "edge" (voces neuronales de Microsoft) o "kokoro" (offline)
 HERE = os.path.dirname(os.path.abspath(__file__))
 SR, FPS = 24000, 24
-GAP, SCENE_IN, SCENE_OUT = 0.35, 0.9, 0.9
+GAP, SCENE_IN, SCENE_OUT = 0.3, 0.9, 0.9
 
-# Cada niña: (estilo de voz, velocidad, factor de tono/formantes)
-VOCES = {
-    "L": dict(speed=1.08, shift=1.24),  # Lucía: más aguda y vivaracha
-    "M": dict(speed=1.00, shift=1.15),  # Marta: algo más grave y pausada
-}
+if MOTOR == "edge":
+    import edge_tts
+    # Cada niña tiene su propia voz; se sube el tono y algo los formantes para que suene infantil
+    VOCES = {
+        "L": dict(voice="es-ES-XimenaNeural", rate="+12%", pitch="+22Hz", shift=1.07),  # Lucía
+        "M": dict(voice="es-ES-ElviraNeural", rate="+8%", pitch="+30Hz", shift=1.08),  # Marta
+    }
 
-k = Kokoro(os.path.join(MOD, "kokoro.onnx"), os.path.join(MOD, "voices.bin"))
-dora = k.get_voice_style("ef_dora")
-bella = k.get_voice_style("af_bella")
-# Marta mezcla un poco de otra voz para que el timbre no sea idéntico al de Lucía
-estilos = {"L": dora, "M": dora * 0.85 + bella * 0.15}
+    def voz_cruda(who, txt, wav):
+        v = VOCES[who]
+        mp3 = wav + ".mp3"
+        for intento in range(4):
+            try:
+                asyncio.run(edge_tts.Communicate(txt, v["voice"], rate=v["rate"], pitch=v["pitch"], proxy=os.environ.get("HTTPS_PROXY")).save(mp3)); break
+            except Exception:
+                if intento == 3: raise
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", mp3, "-ar", str(SR), "-ac", "1", wav], check=True)
+        return SR
+else:
+    from kokoro_onnx import Kokoro
+    VOCES = {"L": dict(speed=1.08, shift=1.24), "M": dict(speed=1.00, shift=1.15)}
+    k = Kokoro(os.path.join(MOD, "kokoro.onnx"), os.path.join(MOD, "voices.bin"))
+    dora, bella = k.get_voice_style("ef_dora"), k.get_voice_style("af_bella")
+    estilos = {"L": dora, "M": dora * 0.85 + bella * 0.15}
+
+    def voz_cruda(who, txt, wav):
+        s, sr = k.create(txt, voice=estilos[who], speed=VOCES[who]["speed"], lang="es")
+        sf.write(wav, s, sr); return sr
 
 
 def sintetiza(who, txt):
-    v = VOCES[who]
-    s, sr = k.create(txt, voice=estilos[who], speed=v["speed"], lang="es")
+    f = VOCES[who]["shift"]
     with tempfile.TemporaryDirectory() as d:
         a, b = os.path.join(d, "a.wav"), os.path.join(d, "b.wav")
-        sf.write(a, s, sr)
+        sr = voz_cruda(who, txt, a)
         # asetrate sube tono y formantes (tracto vocal más corto = voz infantil); atempo recupera la duración
-        f = v["shift"]
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", a, "-af",
                         f"asetrate={int(sr*f)},aresample={SR},atempo={1/f:.5f},"
-                        "highpass=f=120,equalizer=f=3500:t=q:w=1:g=3",
+                        "highpass=f=120,equalizer=f=3500:t=q:w=1:g=2",
                         "-ac", "1", b], check=True)
         out, _ = sf.read(b)
-    # recorta silencios de los extremos
     thr = 0.01 * np.abs(out).max()
     idx = np.where(np.abs(out) > thr)[0]
     out = out[max(0, idx[0] - 600): idx[-1] + 1200]
