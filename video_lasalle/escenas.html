@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Baloo;font-weight:400;src:url(fonts/baloo-2-latin-400-normal.woff2)}
+@font-face{font-family:Baloo;font-weight:700;src:url(fonts/baloo-2-latin-700-normal.woff2)}
+@font-face{font-family:Baloo;font-weight:800;src:url(fonts/baloo-2-latin-800-normal.woff2)}
+@font-face{font-family:Chalk;src:url(fonts/patrick-hand-latin-400-normal.woff2)}
+*{box-sizing:border-box}
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:Baloo,"Noto Color Emoji",sans-serif;color:#24264a}
+.bg{position:absolute;inset:0}
+#floaters{position:absolute;inset:0}
+#title{position:absolute;left:50%;top:36px;transform-origin:center;white-space:nowrap;font-weight:800;font-size:58px;color:#fff;
+ background:#24264a;padding:6px 40px 0;border-radius:60px;box-shadow:0 8px 0 rgba(0,0,0,.15);border:6px solid #fff}
+#panel{position:absolute;left:40px;top:150px;width:1000px;height:930px;border-radius:56px;overflow:hidden;border:12px solid #fff;
+ box-shadow:0 18px 0 rgba(36,38,74,.15);background:#fff}
+#panel svg.sc{position:absolute;left:-12px;top:-12px;width:1000px;height:930px;display:none}
+#L-eyes>g,#M-eyes>g{transform-box:fill-box;transform-origin:center}
+.ff-ch{font-family:Chalk,"Noto Color Emoji"}
+#sub{position:absolute;left:40px;top:1112px;width:1000px;min-height:200px;background:#fff;border-radius:40px;border:8px solid #f5b700;
+ padding:30px 44px 22px;font-weight:700;font-size:50px;line-height:1.16;box-shadow:0 12px 0 rgba(36,38,74,.15);transform-origin:50% 0}
+#sub .w{color:#b9bccf}
+#sub .w.on{color:#24264a}
+#who{position:absolute;top:-34px;padding:2px 26px 0;border-radius:30px;font-size:36px;font-weight:800;color:#fff;border:5px solid #fff}
+#ground{position:absolute;left:0;top:1560px;width:1080px;height:400px}
+.girl{position:absolute;top:1330px;width:500px;height:640px;transform-origin:50% 100%}
+#gL{left:20px}#gM{left:560px}
+.tag{position:absolute;top:1846px;font-weight:800;font-size:40px;color:#fff;padding:2px 28px 0;border-radius:40px;border:5px solid #fff;box-shadow:0 6px 0 rgba(0,0,0,.18)}
+#fade{position:absolute;inset:0;background:#fff;pointer-events:none}
+</style></head><body>
+<div id="stage">
+ <div class="bg" id="bgA"></div><div class="bg" id="bgB"></div>
+ <svg id="floaters" viewBox="0 0 1080 1920"></svg>
+ <svg id="ground" viewBox="0 0 1080 400">
+  <path d="M0,120 Q270,40 540,110 T1080,90 L1080,400 L0,400Z" fill="#7cc96b"/>
+  <path d="M0,170 Q300,110 560,165 T1080,150 L1080,400 L0,400Z" fill="#5fb455"/>
+  <g id="flowers"></g>
+ </svg>
+ <div id="panel"></div>
+ <div id="title">¡Hola!</div>
+ <div id="sub"><div id="who">Lucía</div><div id="subtxt"></div></div>
+
+ <!-- ================= LUCÍA: rubia con coleta ================= -->
+ <svg class="girl" id="gL" viewBox="0 0 500 640">
+  <g id="L-pony" style="transform-origin:345px 115px;transform-box:view-box">
+   <path d="M330,95 C450,80 485,230 440,345 C425,390 398,402 384,392 C415,312 418,200 335,140 Z" fill="#f2c046" stroke="#d49a1f" stroke-width="5"/>
+   <path d="M360,120 C420,150 438,240 418,320" fill="none" stroke="#d49a1f" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <g id="L-wave" style="transform-origin:400px 500px;transform-box:view-box">
+   <path d="M380,505 L455,330" stroke="#25408f" stroke-width="58" stroke-linecap="round"/>
+   <circle cx="462" cy="310" r="34" fill="#fad7bd" stroke="#e7b392" stroke-width="4"/>
+  </g>
+  <path d="M90,640 C90,500 150,440 250,440 C350,440 410,500 410,640Z" fill="#25408f"/>
+  <path d="M120,640 C125,560 140,520 160,505" stroke="#1b2f6b" stroke-width="6" fill="none"/>
+  <path d="M380,640 C375,560 360,520 340,505" stroke="#1b2f6b" stroke-width="6" fill="none"/>
+  <rect x="220" y="395" width="60" height="60" rx="20" fill="#efc0a0"/>
+  <path d="M250,440 L200,432 L225,480Z M250,440 L300,432 L275,480Z" fill="#fff" stroke="#d7dbe8" stroke-width="3"/>
+  <path d="M160,525 l9,18 20,3 -14,14 3,20 -18,-9 -18,9 3,-20 -14,-14 20,-3Z" fill="#ffd23f" stroke="#e0a800" stroke-width="3"/>
+  <circle cx="112" cy="262" r="24" fill="#fad7bd"/><circle cx="388" cy="262" r="24" fill="#fad7bd"/>
+  <ellipse cx="250" cy="250" rx="140" ry="150" fill="#fad7bd"/>
+  <path d="M108,248 C100,125 175,78 252,80 C335,82 398,135 392,250 C380,196 350,158 300,146 C262,172 190,170 135,176 C118,196 110,220 108,248Z" fill="#f2c046" stroke="#d49a1f" stroke-width="5"/>
+  <path d="M300,146 C270,120 230,112 200,118" fill="none" stroke="#d49a1f" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="352" cy="112" r="20" fill="#ff6fa5" stroke="#e04c86" stroke-width="4"/>
+  <path d="M172,228 q25,-14 48,-2 M280,226 q25,-12 48,2" stroke="#c08a3a" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <g id="L-eyes">
+   <g><ellipse cx="198" cy="276" rx="25" ry="30" fill="#fff"/><circle cx="200" cy="280" r="19" fill="#3d8fe0"/><circle cx="200" cy="281" r="9" fill="#1b2340"/><circle cx="207" cy="272" r="6" fill="#fff"/></g>
+   <g><ellipse cx="302" cy="276" rx="25" ry="30" fill="#fff"/><circle cx="300" cy="280" r="19" fill="#3d8fe0"/><circle cx="300" cy="281" r="9" fill="#1b2340"/><circle cx="307" cy="272" r="6" fill="#fff"/></g>
+  </g>
+  <path d="M170,256 l-10,-8 M330,256 l10,-8" stroke="#1b2340" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="160" cy="330" rx="26" ry="16" fill="#ff8fa3" opacity=".45"/><ellipse cx="340" cy="330" rx="26" ry="16" fill="#ff8fa3" opacity=".45"/>
+  <g fill="#d9946a"><circle cx="150" cy="315" r="3.5"/><circle cx="165" cy="322" r="3.5"/><circle cx="152" cy="330" r="3.5"/><circle cx="350" cy="315" r="3.5"/><circle cx="335" cy="322" r="3.5"/><circle cx="348" cy="330" r="3.5"/></g>
+  <path d="M243,310 q7,8 14,0" stroke="#d9946a" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path id="L-smile" d="M222,350 Q250,376 278,350" stroke="#8a3b2e" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <g id="L-mouth"><path id="L-mo" fill="#7a2230"/><ellipse id="L-tg" cx="250" fill="#ff7b8a"/></g>
+ </svg>
+
+ <!-- ================= MARTA: morena, pelo suelto y flequillo ================= -->
+ <svg class="girl" id="gM" viewBox="0 0 500 640">
+  <path id="M-back" d="M108,210 C108,100 180,70 250,70 C320,70 392,100 392,210 L418,560 Q372,598 330,560 L250,430 L170,560 Q128,598 82,560 Z" fill="#3b2314"/>
+  <g id="M-wave" style="transform-origin:100px 500px;transform-box:view-box">
+   <path d="M120,505 L45,330" stroke="#25408f" stroke-width="58" stroke-linecap="round"/>
+   <circle cx="38" cy="310" r="34" fill="#e3ab82" stroke="#c98d63" stroke-width="4"/>
+  </g>
+  <path d="M90,640 C90,500 150,440 250,440 C350,440 410,500 410,640Z" fill="#25408f"/>
+  <path d="M120,640 C125,560 140,520 160,505" stroke="#1b2f6b" stroke-width="6" fill="none"/>
+  <path d="M380,640 C375,560 360,520 340,505" stroke="#1b2f6b" stroke-width="6" fill="none"/>
+  <rect x="220" y="395" width="60" height="60" rx="20" fill="#cf9670"/>
+  <path d="M250,440 L200,432 L225,480Z M250,440 L300,432 L275,480Z" fill="#fff" stroke="#d7dbe8" stroke-width="3"/>
+  <path d="M160,525 l9,18 20,3 -14,14 3,20 -18,-9 -18,9 3,-20 -14,-14 20,-3Z" fill="#ffd23f" stroke="#e0a800" stroke-width="3"/>
+  <circle cx="112" cy="262" r="24" fill="#e3ab82"/><circle cx="388" cy="262" r="24" fill="#e3ab82"/>
+  <ellipse cx="250" cy="250" rx="140" ry="150" fill="#e3ab82"/>
+  <path d="M106,215 C106,170 100,330 120,470 L150,470 C132,360 130,260 140,215Z" fill="#3b2314"/>
+  <path d="M394,215 C394,170 400,330 380,470 L350,470 C368,360 370,260 360,215Z" fill="#3b2314"/>
+  <path d="M104,222 C104,112 178,78 250,78 C322,78 396,112 396,222 L372,234 L352,218 L328,236 L304,219 L278,237 L252,220 L226,237 L200,219 L174,236 L150,218 L126,232Z" fill="#3b2314"/>
+  <path d="M170,120 C210,96 290,96 330,120" stroke="#6b4428" stroke-width="8" fill="none" stroke-linecap="round" opacity=".8"/>
+  <path d="M176,246 q24,-8 46,0 M278,246 q24,-8 46,0" stroke="#2a170c" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <g id="M-eyes">
+   <g><ellipse cx="198" cy="282" rx="25" ry="30" fill="#fff"/><circle cx="200" cy="286" r="19" fill="#7a4a24"/><circle cx="200" cy="287" r="9" fill="#1b1410"/><circle cx="207" cy="278" r="6" fill="#fff"/></g>
+   <g><ellipse cx="302" cy="282" rx="25" ry="30" fill="#fff"/><circle cx="300" cy="286" r="19" fill="#7a4a24"/><circle cx="300" cy="287" r="9" fill="#1b1410"/><circle cx="307" cy="278" r="6" fill="#fff"/></g>
+  </g>
+  <path d="M170,262 l-10,-8 M330,262 l10,-8" stroke="#1b1410" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="160" cy="334" rx="26" ry="16" fill="#e8667e" opacity=".4"/><ellipse cx="340" cy="334" rx="26" ry="16" fill="#e8667e" opacity=".4"/>
+  <path d="M243,314 q7,8 14,0" stroke="#b5784f" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path id="M-smile" d="M222,354 Q250,380 278,354" stroke="#6e2a20" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <g id="M-mouth"><path id="M-mo" fill="#6e1f2b"/><ellipse id="M-tg" cx="250" fill="#ff7b8a"/></g>
+  <path d="M300,96 l6,12 13,2 -9,9 2,13 -12,-6 -12,6 2,-13 -9,-9 13,-2Z" fill="#ffd23f" stroke="#e0a800" stroke-width="2"/>
+ </svg>
+ <div class="tag" id="tagL" style="left:170px;background:#f5b700">Lucía</div>
+ <div class="tag" id="tagM" style="left:712px;background:#8e5bd6">Marta</div>
+ <div id="fade"></div>
+</div>
+<script src="timeline.js"></script>
+<script>
+const $=(s,r=document)=>[...r.querySelectorAll(s)];
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const easeOutBack=p=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2)};
+const easeOut=p=>1-Math.pow(1-p,3);
+const TL=window.TL;
+const COL={L:'#f5b700',M:'#8e5bd6',A:'#ff6b6b'};
+const NAME={L:'Lucía',M:'Marta',A:'Lucía y Marta'};
+
+/* ---------- piezas de dibujo ---------- */
+const star=(cx,cy,r,fill,stroke='none',sw=0,ex='')=>{let p=[];for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*0.45:r;p.push((cx+Math.cos(a)*rr).toFixed(1)+','+(cy+Math.sin(a)*rr).toFixed(1))}
+ return `<polygon points="${p.join(' ')}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" ${ex}/>`};
+const badge=(x,y,w,h,txt,fill,col='#fff',fs=46,ex='')=>`<g ${ex}><rect x="${x-w/2}" y="${y-h/2}" width="${w}" height="${h}" rx="${h/2}" fill="${fill}" stroke="#fff" stroke-width="6"/><text x="${x}" y="${y+fs*0.36}" text-anchor="middle" font-weight="800" font-size="${fs}" fill="${col}">${txt}</text></g>`;
+const cloud=(x,y,s,ex='')=>`<g transform="translate(${x},${y}) scale(${s})"><g ${ex}><ellipse cx="0" cy="0" rx="70" ry="38" fill="#fff"/><circle cx="-35" cy="-15" r="32" fill="#fff"/><circle cx="20" cy="-28" r="40" fill="#fff"/><circle cx="55" cy="-5" r="28" fill="#fff"/></g></g>`;
+const tree=(x,y,s,c='#4caf50',ex='')=>`<g transform="translate(${x},${y}) scale(${s})"><g ${ex}><rect x="-14" y="-90" width="28" height="90" rx="8" fill="#8b5a2b"/><circle cx="0" cy="-130" r="70" fill="${c}"/><circle cx="-45" cy="-100" r="45" fill="${c}"/><circle cx="45" cy="-100" r="45" fill="${c}"/><circle cx="-20" cy="-150" r="18" fill="#fff" opacity=".18"/></g></g>`;
+// adulto: hermano, Juan Bautista, maestro, familiar…  (x,y = pies)
+function adult(x,y,s,o={}){
+ const skin=o.skin||'#f6cfb0',coat=o.coat||'#1d1d2b',hair=o.hair||'#3b2a1e';
+ const brows=o.angry?`<path d="M-30,-282 l20,8 M30,-282 l-20,8" stroke="#2a1a10" stroke-width="6" stroke-linecap="round"/>`:'';
+ const mouth=o.angry?`<path d="M-14,-232 q14,-10 28,0" stroke="#7a2a20" stroke-width="5" fill="none" stroke-linecap="round"/>`:`<path d="M-16,-238 q16,14 32,0" stroke="#7a2a20" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+ const hairBack=o.longHair?`<path d="M-56,-262 C-62,-330 62,-330 56,-262 L60,-200 L36,-205 L40,-250 L-40,-250 L-36,-205 L-60,-200Z" fill="${hair}"/>`:'';
+ const dress=o.dress?`<path d="M-80,0 L-50,-190 Q0,-210 50,-190 L80,0Z" fill="${coat}"/><path d="M-50,-190 Q0,-170 50,-190 L44,-150 Q0,-135 -44,-150Z" fill="#fff" opacity=".85"/>`
+  :`<path d="M-68,0 L-56,-196 Q0,-216 56,-196 L68,0Z" fill="${coat}"/>`;
+ const hat=o.hat?`<path d="M-70,-300 Q0,-330 70,-300 Q40,-290 0,-288 Q-40,-290 -70,-300Z" fill="#2a2a2a"/><path d="M-40,-300 Q0,-360 40,-300Z" fill="#2a2a2a"/>`:'';
+ const bun=o.bun?`<circle cx="0" cy="-318" r="22" fill="${hair}"/>`:'';
+ const halo=o.halo?`<ellipse cx="0" cy="-322" rx="58" ry="16" fill="none" stroke="#ffd23f" stroke-width="9" ${o.halo}/>`:'';
+ return `<g transform="translate(${x},${y}) scale(${s})">${hairBack}${dress}
+  <path d="M-56,-190 Q-86,-120 -74,-70" stroke="${coat}" stroke-width="30" stroke-linecap="round" fill="none"/>
+  <path d="M56,-190 Q86,-120 74,-70" stroke="${coat}" stroke-width="30" stroke-linecap="round" fill="none"/>
+  <circle cx="-74" cy="-62" r="15" fill="${skin}"/><circle cx="74" cy="-62" r="15" fill="${skin}"/>
+  ${o.rabat?`<path d="M-11,-202 h10 v34 h-12Z M1,-202 h10 l2,34 h-12Z" fill="#fff" stroke="#ccc" stroke-width="1.5"/>`:''}
+  <circle cx="0" cy="-258" r="50" fill="${skin}"/>
+  <path d="M-52,-258 C-56,-322 56,-322 52,-258 C40,-290 -40,-290 -52,-258Z" fill="${hair}"/>${bun}${hat}
+  <circle cx="-18" cy="-262" r="6" fill="#2a1a10"/><circle cx="18" cy="-262" r="6" fill="#2a1a10"/>${brows}${mouth}
+  <circle cx="-30" cy="-240" r="9" fill="#ff8fa3" opacity=".45"/><circle cx="30" cy="-240" r="9" fill="#ff8fa3" opacity=".45"/>
+  ${o.book?`<g transform="translate(0,-110)"><rect x="-46" y="-30" width="92" height="60" rx="6" fill="#c0392b" stroke="#7b1f16" stroke-width="4"/><line x1="0" y1="-30" x2="0" y2="30" stroke="#7b1f16" stroke-width="4"/></g>`:''}
+  ${halo}</g>`;
+}
+// niño/a (x,y = pies)
+function kid(x,y,s,o={}){
+ const skin=o.skin||'#f6cfb0',hair=o.hair||'#5a3a22',shirt=o.shirt||'#4aa3ff',pants=o.pants||'#2f3b66';
+ const sad=`<path d="M-12,-148 q12,-10 24,0" stroke="#6b2a20" stroke-width="5" fill="none" stroke-linecap="round" ${o.sadAttr||''}/>`;
+ const happy=`<path d="M-14,-154 q14,14 28,0" stroke="#6b2a20" stroke-width="5" fill="none" stroke-linecap="round" ${o.happyAttr||''}/>`;
+ return `<g transform="translate(${x},${y}) scale(${s})"><g ${o.ex||''}>
+  ${o.long?`<path d="M-48,-190 C-60,-250 60,-250 48,-190 L52,-130 L-52,-130Z" fill="${hair}"/>`:''}
+  <rect x="-26" y="-62" width="20" height="62" rx="8" fill="${pants}"/><rect x="6" y="-62" width="20" height="62" rx="8" fill="${pants}"/>
+  <rect x="-40" y="-130" width="80" height="80" rx="22" fill="${shirt}"/>
+  ${o.patch?`<rect x="-22" y="-110" width="18" height="16" fill="#a1887f" stroke="#6d4c41" stroke-dasharray="4 3" stroke-width="2"/><rect x="10" y="-80" width="16" height="14" fill="#bcaaa4"/>`:''}
+  <path d="M-38,-118 q-22,30 -16,58 M38,-118 q22,30 16,58" stroke="${shirt}" stroke-width="18" stroke-linecap="round" fill="none"/>
+  <circle cx="-54" cy="-56" r="10" fill="${skin}"/><circle cx="54" cy="-56" r="10" fill="${skin}"/>
+  <circle cx="0" cy="-180" r="46" fill="${skin}"/>
+  <path d="M-48,-182 C-52,-242 52,-242 48,-182 C36,-208 -36,-208 -48,-182Z" fill="${hair}"/>
+  <circle cx="-16" cy="-182" r="6" fill="#2a1a10"/><circle cx="16" cy="-182" r="6" fill="#2a1a10"/>
+  <circle cx="-28" cy="-160" r="8" fill="#ff8fa3" opacity=".45"/><circle cx="28" cy="-160" r="8" fill="#ff8fa3" opacity=".45"/>
+  ${o.sad?sad:''}${o.sad&&!o.happyAttr?'':happy}
+  ${o.book?`<rect x="30" y="-100" width="40" height="50" rx="4" fill="${o.book}" stroke="#fff" stroke-width="3"/>`:''}
+ </g></g>`;
+}
+const SKINS=['#f6cfb0','#e3ab82','#c68642','#8d5524','#f1c27d','#ffdbac'];
+const HAIRS=['#2a1a10','#f2c046','#5a3a22','#111','#a0522d','#3b2314'];
+const SHIRTS=['#4aa3ff','#ff6b6b','#ffd23f','#2ecc71','#ff8fd1','#8e5bd6','#ff9f43'];
+function cathedral(x,y,s){ // y = base
+ return `<g transform="translate(${x},${y}) scale(${s})">
+  <rect x="-230" y="-330" width="120" height="330" fill="#d8c7ab" stroke="#a8916f" stroke-width="5"/>
+  <rect x="110" y="-330" width="120" height="330" fill="#d8c7ab" stroke="#a8916f" stroke-width="5"/>
+  <path d="M-230,-330 L-170,-430 L-110,-330Z M110,-330 L170,-430 L230,-330Z" fill="#b59c78"/>
+  <path d="M-110,0 L-110,-260 L0,-360 L110,-260 L110,0Z" fill="#e6d8bf" stroke="#a8916f" stroke-width="5"/>
+  <circle cx="0" cy="-220" r="52" fill="#6fa8ff" stroke="#a8916f" stroke-width="8"/>
+  ${[0,45,90,135].map(a=>`<line x1="0" y1="-272" x2="0" y2="-168" stroke="#a8916f" stroke-width="5" transform="rotate(${a} 0 -220)" style="transform-box:view-box"/>`).join('')}
+  <path d="M-48,0 L-48,-90 Q0,-150 48,-90 L48,0Z" fill="#7a5230"/>
+  ${[-200,-140,140,200].map(cx=>`<path d="M${cx-16},-120 L${cx-16},-210 Q${cx},-240 ${cx+16},-210 L${cx+16},-120Z" fill="#6fa8ff" opacity=".85"/>`).join('')}
+  <path d="M-170,-430 v-30 M170,-430 v-30 M0,-360 v-40 M-12,-388 h24" stroke="#a8916f" stroke-width="6"/>
+ </g>`;
+}
+function school(x,y,s,o={}){
+ const wall=o.wall||'#ffe8c2',roof=o.roof||'#e2574c';
+ return `<g transform="translate(${x},${y}) scale(${s})">
+  <rect x="-240" y="-330" width="480" height="330" fill="${wall}" stroke="#e0a96d" stroke-width="6"/>
+  <path d="M-265,-320 L0,-480 L265,-320Z" fill="${roof}" stroke="#b83f36" stroke-width="6" stroke-linejoin="round"/>
+  ${star(0,-385,48,'#ffd23f','#e0a800',5,o.starAttr||'')}
+  ${[-170,-85,85,170].map(cx=>[-270,-150].map(cy=>`<rect x="${cx-30}" y="${cy}" width="60" height="70" rx="8" fill="#8fd3ff" stroke="#fff" stroke-width="6"/><path d="M${cx},${cy} v70 M${cx-30},${cy+35} h60" stroke="#fff" stroke-width="4"/>`).join('')).join('')}
+  <path d="M-50,0 L-50,-120 Q0,-170 50,-120 L50,0Z" fill="#a0522d" stroke="#7a3b1d" stroke-width="5"/>
+  ${o.sign?`<rect x="-120" y="-318" width="240" height="44" rx="12" fill="#25408f"/><text x="0" y="-284" text-anchor="middle" font-weight="800" font-size="34" fill="#fff">${o.sign}</text>`:''}
+ </g>`;
+}
+function coin(x,y,r=22,ex=''){return `<g ${ex}><circle cx="${x}" cy="${y}" r="${r}" fill="#ffd23f" stroke="#e0a800" stroke-width="4"/><circle cx="${x}" cy="${y}" r="${r*0.6}" fill="none" stroke="#e0a800" stroke-width="3"/></g>`}
+const heart=(x,y,s,c='#ff4d6d',ex='')=>`<g transform="translate(${x},${y}) scale(${s})"><path d="M0,30 C-60,-10 -30,-60 0,-30 C30,-60 60,-10 0,30Z" fill="${c}" ${ex}/></g>`;
+const sky=(id,a,b)=>`<defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="1000" height="930" fill="url(#${id})"/>`;
+const sparkle=(x,y,r,ex='')=>`<g ${ex}>${star(x,y,r,'#fff7b0','#ffd23f',3)}</g>`;
+
+/* ---------- mapa del mundo (lon,lat) ---------- */
+const MX=lon=>(lon+180)/360*1000, MY=lat=>120+(80-lat)/140*560;
+const land=pts=>`<polygon points="${pts.map(([a,b])=>MX(a).toFixed(1)+','+MY(b).toFixed(1)).join(' ')}" fill="#7ed492" stroke="#4e9d61" stroke-width="5" stroke-linejoin="round"/>`;
+const CONT=[
+ [[-165,65],[-160,70],[-140,70],[-120,72],[-95,75],[-80,73],[-65,62],[-55,52],[-65,45],[-75,38],[-80,30],[-80,25],[-90,29],[-97,26],[-97,20],[-90,16],[-83,9],[-78,8],[-85,12],[-95,15],[-105,20],[-112,28],[-118,33],[-124,40],[-124,48],[-135,58],[-150,60],[-165,60]],
+ [[-55,60],[-45,60],[-20,70],[-20,80],[-60,80],[-70,77],[-55,70]],
+ [[-78,8],[-72,12],[-60,10],[-50,0],[-35,-6],[-38,-15],[-48,-25],[-58,-35],[-65,-42],[-68,-52],[-74,-50],[-72,-35],[-71,-20],[-76,-14],[-81,-5],[-80,0]],
+ [[-9,37],[-9,43],[-2,44],[-5,48],[2,51],[8,54],[10,57],[5,59],[8,63],[15,69],[25,71],[40,68],[60,70],[80,73],[100,77],[120,73],[140,72],[160,70],[180,68],[175,62],[160,60],[155,52],[140,48],[135,42],[127,37],[122,31],[120,23],[108,21],[108,12],[104,2],[98,8],[98,16],[92,22],[88,22],[80,15],[77,8],[72,20],[67,25],[57,25],[52,15],[43,12],[35,28],[35,33],[30,36],[27,38],[23,36],[20,40],[15,38],[16,41],[12,44],[8,44],[3,43],[-1,37]],
+ [[-17,21],[-17,14],[-12,8],[-5,5],[5,5],[9,4],[10,-3],[13,-12],[12,-18],[15,-27],[18,-34],[25,-34],[32,-28],[35,-20],[40,-15],[40,-5],[43,0],[51,12],[43,12],[35,28],[32,31],[20,32],[10,37],[0,36],[-6,35],[-10,30]],
+ [[113,-22],[115,-34],[125,-33],[135,-35],[140,-38],[150,-37],[153,-28],[145,-15],[142,-11],[136,-12],[130,-12],[125,-15]],
+ [[-5,50],[1,51],[1,53],[-2,56],[-5,58],[-6,55],[-3,54]],
+ [[130,31],[135,34],[141,36],[142,42],[140,41],[137,36],[131,34]],
+ [[44,-25],[47,-25],[50,-15],[49,-12],[44,-17]],
+ [[95,5],[105,-6],[115,-8],[120,-5],[110,2]],[[118,6],[126,8],[124,18],[120,16]]
+];
+const PINS=[[12.5,41.9],[4.4,50.8],[-6.3,53.3],[-73.6,45.5],[-74,40.7],[-99.1,19.4],[-74.1,4.7],[-77,-12],[-70.6,-33.4],[-58.4,-34.6],[-47.9,-15.8],[31.2,30],[38.7,9],[36.8,-1.3],[28,-26.2],[77.2,28.6],[106.7,10.8],[121,14.6],[151.2,-33.9],[-90.5,14.6],[2.2,41.4],[-8.6,41.1],[-122.4,37.8],[-66.9,10.5],[103.8,1.4],[114.2,22.3],[-79.5,9]];
+
+/* ---------- escenas ---------- */
+const SC={};
+SC.intro=()=>`${sky('g1','#8fd3ff','#e6f7ff')}
+ <g transform="translate(840,150)"><g data-spin="18">${[...Array(12)].map((_,i)=>`<rect x="-6" y="-125" width="12" height="40" rx="6" fill="#ffd23f" transform="rotate(${i*30})" style="transform-box:view-box;transform-origin:0 0"/>`).join('')}<circle r="72" fill="#ffd23f"/></g><circle cx="-22" cy="-8" r="7" fill="#7a4a10"/><circle cx="22" cy="-8" r="7" fill="#7a4a10"/><path d="M-24,18 q24,22 48,0" stroke="#7a4a10" stroke-width="6" fill="none" stroke-linecap="round"/></g>
+ ${cloud(150,130,1.1,'data-drift="22"')}${cloud(560,90,0.8,'data-drift="14"')}
+ <path d="M0,760 Q250,640 520,720 T1000,690 L1000,930 L0,930Z" fill="#8bd77a"/><path d="M0,830 Q300,760 560,820 T1000,800 L1000,930 L0,930Z" fill="#6cc35f"/>
+ ${tree(110,800,1,'#4caf50','data-swing="3,1.6"')}${tree(900,810,0.9,'#43a047','data-swing="3,1.3"')}
+ ${school(500,780,0.95,{sign:'COLE LA SALLE',starAttr:'data-spin="40" data-in="L3+0.8" data-sfx="ding"'})}
+ <g data-in="L3" data-sfx="chime"><path d="M70,250 L930,250 L900,300 L930,350 L70,350 L100,300Z" fill="#ff6b6b" stroke="#fff" stroke-width="8" transform="translate(0,-60)" style="transform-box:view-box;transform-origin:0 0"/>
+  <text x="500" y="258" text-anchor="middle" font-weight="800" font-size="64" fill="#fff" stroke="#c0392b" stroke-width="3" paint-order="stroke">San Juan Bautista de La Salle</text></g>
+ <g data-stagger="L3+0.3,0.12">${sparkle(90,150,22)}${sparkle(920,330,26)}${sparkle(60,350,18)}${sparkle(950,170,20)}${sparkle(500,110,24)}</g>`;
+
+SC.nacimiento=()=>`${sky('g2','#ffb48a','#ffe9cf')}
+ <circle cx="820" cy="200" r="90" fill="#fff3b0" opacity=".8"/>
+ ${cloud(200,150,0.9,'data-drift="12"')}
+ <path d="M0,700 h1000 v230 h-1000Z" fill="#c9b18c"/>
+ ${[60,170,820,930].map((x,i)=>`<g><rect x="${x-50}" y="${560-i%2*40}" width="100" height="${140+i%2*40}" fill="${['#e9a87c','#d98f66','#e9a87c','#d98f66'][i]}"/><path d="M${x-60},${560-i%2*40} L${x},${500-i%2*40} L${x+60},${560-i%2*40}Z" fill="#9c4a3a"/><rect x="${x-20}" y="${600-i%2*40}" width="40" height="40" fill="#ffe7a3"/></g>`).join('')}
+ ${cathedral(470,700,0.95)}
+ <g data-in="L0+0.6" data-sfx="pop">${star(860,110,0,'none')}<circle cx="860" cy="110" r="78" fill="#ff6b6b" stroke="#fff" stroke-width="8"/><text x="860" y="132" text-anchor="middle" font-weight="800" font-size="56" fill="#fff">1651</text></g>
+ <g data-in="L0+2.2" data-out="L1" data-sfx="pop"><g transform="translate(770,690)"><g data-swing="6,2.2" style="transform-origin:50% 0"><path d="M-110,-70 Q0,40 110,-70Z" fill="#a0522d" stroke="#6d3a1e" stroke-width="6"/><circle cx="-40" cy="-88" r="34" fill="#f6cfb0"/><path d="M-60,-100 q20,-18 40,0" stroke="#5a3a22" stroke-width="6" fill="none"/><circle cx="-50" cy="-88" r="4" fill="#2a1a10"/><circle cx="-30" cy="-88" r="4" fill="#2a1a10"/><path d="M-70,-70 Q20,-110 100,-70Z" fill="#8fd3ff" stroke="#fff" stroke-width="4"/></g></g></g>
+ <g data-stagger="L1+0.2,0.16">${[...Array(11)].map((_,i)=>kid(80+i*84,900,i?0.62:0.82,{skin:'#f6cfb0',hair:HAIRS[[0,2,4,0,2,1,4,0,2,4,1][i]],shirt:SHIRTS[i%7]})).join('')}</g>
+ <g data-in="L1+0.6" data-sfx="pop">${badge(170,640,230,60,'¡El mayor!','#25408f','#fff',38)}<path d="M110,668 l-10,34 l32,-22" fill="#25408f"/></g>
+ <g data-in="L2" data-sfx="ding"><g transform="translate(770,560)"><rect x="-100" y="-20" width="200" height="110" rx="12" fill="#a0522d" stroke="#6d3a1e" stroke-width="6"/><path d="M-100,-20 Q0,-110 100,-20Z" fill="#b5652f" stroke="#6d3a1e" stroke-width="6"/><rect x="-18" y="0" width="36" height="34" rx="6" fill="#ffd23f"/>${coin(-50,-40,20)}${coin(0,-60,22)}${coin(50,-38,20)}${coin(-20,-80,18)}${coin(30,-90,16)}</g>
+ <g data-stagger="L2+0.3,0.1">${sparkle(680,450,18)}${sparkle(880,470,22)}${sparkle(780,400,16)}</g></g>`;
+
+SC.joven=()=>`${sky('g3','#d9ccff','#f3eeff')}
+ <rect x="0" y="720" width="1000" height="210" fill="#c99a6b"/>${[...Array(8)].map((_,i)=>`<line x1="${i*130}" y1="720" x2="${i*130-60}" y2="930" stroke="#a87c52" stroke-width="5"/>`).join('')}
+ <g transform="translate(40,230)"><rect width="220" height="490" fill="#8b5a2b" rx="10"/>${[0,1,2,3].map(r=>`<rect x="12" y="${20+r*118}" width="196" height="100" fill="#6b4220"/>`+[...Array(7)].map((_,i)=>`<rect x="${18+i*27}" y="${30+r*118+(i%3)*6}" width="22" height="${90-(i%3)*6}" rx="3" fill="${SHIRTS[(i+r)%7]}"/>`).join('')).join('')}</g>
+ <g transform="translate(720,140)"><rect width="230" height="300" rx="110" fill="#bfe6ff" stroke="#fff" stroke-width="14"/>${cathedral(115,290,0.32)}<path d="M115,0 v300 M0,170 h230" stroke="#fff" stroke-width="10"/></g>
+ <g data-bob="6,1.8">${adult(500,820,1.25,{rabat:true,hair:'#3b2a1e',longHair:true,book:true})}</g>
+ <g data-in="L0+0.4" data-sfx="pop">${badge(330,135,250,80,'16 años','#ff6b6b','#fff',52)}</g>
+ <g data-in="L0+2.4" data-sfx="pop">${badge(350,250,360,64,'Canónigo de Reims','#25408f','#fff',38)}</g>
+ <g data-stagger="L1+0.3,0.25">${kid(300,840,0.62,{hair:'#5a3a22',shirt:'#ff8fd1',long:true})}${kid(380,860,0.5,{hair:'#2a1a10',shirt:'#2ecc71'})}${kid(640,850,0.58,{hair:'#5a3a22',shirt:'#ffd23f'})}${kid(720,870,0.48,{hair:'#a0522d',shirt:'#4aa3ff',long:true})}</g>
+ <g data-in="L1+1.2" data-out="L2+0.5">${heart(420,470,0.7,'#ff4d6d','data-bob="12,3"')}${heart(590,440,0.9,'#ff6b8b','data-bob="14,2.6"')}${heart(500,400,0.6,'#ff4d6d','data-bob="10,3.4"')}</g>
+ <g data-in="L2" data-sfx="ding"><g transform="translate(820,560)"><path d="M-80,0 L0,-40 L80,0 L0,40Z" fill="#24264a"/><rect x="-46" y="10" width="92" height="40" rx="8" fill="#24264a"/><path d="M60,8 v50" stroke="#ffd23f" stroke-width="6"/><circle cx="60" cy="62" r="9" fill="#ffd23f"/></g></g>
+ <g data-in="L2+0.4" data-sfx="pop">${badge(800,680,330,64,'Sacerdote','#8e5bd6','#fff',40)}</g>
+ <g data-in="L2+1.2" data-sfx="pop">${badge(760,110,420,64,'Doctor en Teología','#8e5bd6','#fff',40)}</g>`;
+
+SC.pobres=()=>`${sky('g4','#b9c6d4','#eef2f6')}
+ ${cloud(220,120,1,'data-drift="10"')}${cloud(700,90,0.8,'data-drift="16"')}
+ ${[[40,300,'#a1887f'],[200,260,'#90a4ae'],[820,280,'#8d6e63']].map(([x,y,c])=>`<g><rect x="${x}" y="${y}" width="150" height="${700-y}" fill="${c}"/><path d="M${x-10},${y} L${x+75},${y-70} L${x+160},${y}Z" fill="#6d4c41"/><rect x="${x+40}" y="${y+50}" width="40" height="50" fill="#455a64"/></g>`).join('')}
+ <g transform="translate(560,700) scale(0.62)">${school(0,0,1,{wall:'#e0d6c8',roof:'#9e5a50',sign:'ESCUELA'})}</g>
+ <g data-in="L0+1.2" data-out="L2+2.2" data-sfx="pop"><g transform="translate(560,560)"><rect x="-30" y="-36" width="60" height="50" rx="8" fill="#555"/><path d="M-18,-36 v-20 a18,18 0 0 1 36,0 v20" stroke="#555" stroke-width="10" fill="none"/></g></g>
+ <g data-in="L2+2.2" data-sfx="chime"><g transform="translate(560,640)"><path d="M-31,60 L-31,-14 Q0,-45 31,-14 L31,60Z" fill="#fff3b0"/></g>${sparkle(615,585,20)}</g>
+ <path d="M0,700 h1000 v230 h-1000Z" fill="#9e9e9e"/>${[...Array(30)].map((_,i)=>`<ellipse cx="${(i%10)*105+(Math.floor(i/10)%2)*50}" cy="${740+Math.floor(i/10)*65}" rx="44" ry="18" fill="#8a8a8a"/>`).join('')}
+ <g data-stagger="L0+0.2,0.3">${[[110,0.9],[250,0.78],[380,0.85]].map(([x,s],i)=>kid(x,880,s,{skin:SKINS[i],hair:HAIRS[[0,2,5][i]],shirt:['#9e8f7a','#8d7b68','#a69a86'][i],pants:'#5d4037',patch:true,sad:true,long:i===1,sadAttr:'data-out="L2+3" data-anim="fade"',happyAttr:'data-in="L2+3" data-anim="fade"'})).join('')}</g>
+ <g data-in="L1+0.4" data-out="L2" data-sfx="pop"><g transform="translate(240,410)"><ellipse rx="150" ry="70" fill="#fff" stroke="#24264a" stroke-width="5"/><path d="M-20,60 l-30,50 l60,-40" fill="#fff" stroke="#24264a" stroke-width="5"/><text y="22" text-anchor="middle" font-weight="800" font-size="64" fill="#24264a">A B C</text><line x1="-110" y1="40" x2="110" y2="-40" stroke="#e53935" stroke-width="12" stroke-linecap="round"/></g></g>
+ <g data-in="L2" data-anim="right" data-sfx="whoosh">${adult(740,900,0.95,{coat:'#795548',hat:true,hair:'#9e9e9e'})}</g>
+ <g data-in="L2+0.5" data-anim="right">${adult(890,900,0.95,{rabat:true,longHair:true})}</g>
+ <g data-in="L2+1.0" data-sfx="pop">${badge(815,500,330,60,'Adrián Nyel','#795548','#fff',38)}</g>
+ <g data-in="L2+1.6" data-sfx="ding"><g transform="translate(815,380)" data-bob="8,3"><circle r="46" fill="#ffd23f" stroke="#e0a800" stroke-width="6"/><rect x="-18" y="40" width="36" height="26" rx="6" fill="#9e9e9e"/>${[0,60,120,180,240,300].map(a=>`<line x1="0" y1="-60" x2="0" y2="-82" stroke="#ffd23f" stroke-width="8" stroke-linecap="round" transform="rotate(${a})" style="transform-box:view-box;transform-origin:0 0"/>`).join('')}</g></g>
+ <g data-in="L2+0.3" data-sfx="pop">${badge(880,110,190,74,'1679','#ff6b6b','#fff',50)}</g>`;
+
+SC.casa=()=>`${sky('g5','#ffd79a','#fff3dc')}
+ <rect x="0" y="700" width="1000" height="230" fill="#b07a4f"/>
+ <g transform="translate(60,170)"><rect width="360" height="250" rx="10" fill="#2e7d5b" stroke="#8b5a2b" stroke-width="16"/><text x="180" y="110" text-anchor="middle" class="ff-ch" font-size="80" fill="#fff">A B C</text><text x="180" y="200" text-anchor="middle" class="ff-ch" font-size="70" fill="#fff8c4">1 2 3</text></g>
+ <g transform="translate(720,140)"><rect width="200" height="200" rx="16" fill="#8fd3ff" stroke="#fff" stroke-width="12"/><path d="M100,0 v200 M0,100 h200" stroke="#fff" stroke-width="10"/></g>
+ <g data-in="L0+0.2" data-anim="up">${adult(160,860,1.0,{rabat:true,longHair:true})}</g>
+ <g data-stagger="L0+1.0,0.3">${[['#6d4c41','#2a1a10'],['#546e7a','#5a3a22'],['#8d6e63','#111'],['#607d8b','#a0522d']].map(([c,h],i)=>adult(330+i*120,800,0.7,{coat:c,hair:h})).join('')}</g>
+ <g data-in="L0+0.8"><rect x="290" y="690" width="520" height="40" rx="10" fill="#8b5a2b"/><rect x="310" y="730" width="22" height="130" fill="#6d4321"/><rect x="770" y="730" width="22" height="130" fill="#6d4321"/>${[0,1,2,3].map(i=>`<rect x="${335+i*120}" y="672" width="40" height="24" rx="3" fill="#fff"/>`).join('')}</g>
+ <g data-in="L1" data-out="L2" data-sfx="pop"><g data-shake="1"><g>${adult(860,880,0.8,{coat:'#c0392b',hair:'#5a3a22',angry:true,dress:true,bun:true})}</g>
+  <g transform="translate(800,420)"><ellipse rx="165" ry="80" fill="#fff" stroke="#c0392b" stroke-width="6"/><path d="M40,72 l40,60 l10,-66" fill="#fff" stroke="#c0392b" stroke-width="6"/><text y="22" text-anchor="middle" font-weight="800" font-size="64" fill="#c0392b">¡¡Hmph!!</text></g></g></g>
+ <g data-in="L2" data-anim="right">${[0,1,2].map(i=>kid(700+i*100,890,0.7,{skin:SKINS[i+1],hair:HAIRS[i+2],shirt:['#9e8f7a','#8d7b68','#a69a86'][i],pants:'#5d4037',patch:true})).join('')}</g>
+ <g data-in="L2+0.4">${[...Array(7)].map((_,i)=>`<g class="fly" data-fly="200,620,${710+(i%3)*100},640,260,1.6,${(i*0.23).toFixed(2)}">${i%3===2?`<g><ellipse cx="0" cy="0" rx="34" ry="20" fill="#e0a15a" stroke="#a86a2c" stroke-width="4"/><path d="M-16,-8 l6,10 M0,-12 l6,10 M16,-8 l6,10" stroke="#a86a2c" stroke-width="3"/></g>`:coin(0,0,20)}</g>`).join('')}</g>
+ <g data-in="L2+0.6" data-sfx="pop">${badge(780,560,330,64,'Pan para todos','#ff9f43','#fff',40)}</g>`;
+
+SC.fundacion=()=>`${sky('g6','#6fa3ff','#e0eeff')}
+ <g transform="translate(500,250)"><g data-spin="10" data-in="0.2">${[...Array(16)].map((_,i)=>`<path d="M-18,0 L0,-330 L18,0Z" fill="#fff" opacity=".35" transform="rotate(${i*22.5})" style="transform-box:view-box;transform-origin:0 0"/>`).join('')}</g>
+ <g data-in="0.5" data-sfx="ding" data-pulse="0.05,2.5">${star(0,0,130,'#ffd23f','#fff',10)}</g></g>
+ <path d="M0,760 Q500,700 1000,760 L1000,930 L0,930Z" fill="#8bd77a"/>
+ <g data-in="L0+0.4" data-sfx="pop">${badge(150,110,210,84,'1684','#ff6b6b','#fff',56)}</g>
+ <g data-stagger="L0+0.8,0.25">${adult(200,800,0.78,{rabat:true,hair:'#5a3a22'})}${adult(330,790,0.82,{rabat:true,hair:'#2a1a10'})}${adult(500,800,0.95,{rabat:true,longHair:true})}${adult(670,790,0.82,{rabat:true,hair:'#a0522d'})}${adult(800,800,0.78,{rabat:true,hair:'#111'})}</g>
+ <g data-in="L0+3" data-sfx="pop"><rect x="60" y="430" width="880" height="78" rx="39" fill="#25408f" stroke="#fff" stroke-width="6"/><text x="500" y="485" text-anchor="middle" font-weight="800" font-size="42" fill="#fff">Hermanos de las Escuelas Cristianas</text></g>
+ <g data-stagger="L1+0.3,0.18">${[0,1,2,3,4,5].map(i=>kid(130+i*148,930,0.62,{skin:SKINS[i],hair:HAIRS[i],shirt:SHIRTS[i],book:SHIRTS[(i+3)%7],long:i%2===1})).join('')}</g>
+ <g data-in="L1+3.4" data-sfx="stamp"><g transform="translate(790,640) rotate(-12)" style="transform-box:view-box;transform-origin:0 0"><rect x="-150" y="-55" width="300" height="110" rx="18" fill="#fff" stroke="#e53935" stroke-width="10"/><text y="26" text-anchor="middle" font-weight="800" font-size="72" fill="#e53935">¡GRATIS!</text></g></g>`;
+
+SC.ideas=()=>{const it=[['🗣️','Clases en francés, ¡no en latín!'],['📚','Alumnos agrupados por niveles'],['👨‍🏫','Escuelas para formar maestros'],['☀️','Escuelas los domingos para','chicos que trabajaban']];
+ return `<rect width="1000" height="930" fill="#8b5a2b"/><rect x="30" y="30" width="940" height="840" rx="16" fill="#2f6e55"/>
+ <rect x="30" y="30" width="940" height="840" rx="16" fill="url(#chalkTx)" opacity=".15"/>
+ <defs><pattern id="chalkTx" width="60" height="60" patternUnits="userSpaceOnUse"><circle cx="10" cy="20" r="2" fill="#fff"/><circle cx="40" cy="45" r="1.5" fill="#fff"/></pattern></defs>
+ <text x="500" y="135" text-anchor="middle" class="ff-ch" font-size="72" fill="#fff8c4" data-in="0.3" data-anim="fade">¡Ideas geniales!</text>
+ <path d="M300,160 Q500,180 700,158" stroke="#fff8c4" stroke-width="5" fill="none" data-in="0.6" data-anim="fade"/>
+ ${it.map((x,i)=>`<g data-in="L${i}+0.2" data-anim="left" data-sfx="chalk"><text x="80" y="${280+i*165}" class="ff-ch" font-size="64" fill="#fff">${x[0]}</text><text x="185" y="${275+i*165}" class="ff-ch" font-size="${x[2]?52:56}" fill="#fff">${x[1]}</text>${x[2]?`<text x="185" y="${330+i*165}" class="ff-ch" font-size="52" fill="#fff">${x[2]}</text>`:''}</g>
+  <g data-in="L${i}+1.6" data-sfx="pop"><path d="M890,${240+i*165} l20,26 l40,-60" stroke="#ffd23f" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`).join('')}
+ <rect x="30" y="870" width="940" height="30" fill="#6d4321"/><rect x="700" y="852" width="90" height="26" rx="6" fill="#fff"/><rect x="820" y="846" width="110" height="34" rx="6" fill="#c0392b"/>`};
+
+SC.santo=()=>`${sky('g8','#ffcf4a','#fff6d1')}
+ <g transform="translate(500,520)"><g data-spin="8">${[...Array(18)].map((_,i)=>`<path d="M-22,0 L0,-560 L22,0Z" fill="#fff" opacity=".3" transform="rotate(${i*20})" style="transform-box:view-box;transform-origin:0 0"/>`).join('')}</g></g>
+ ${cloud(180,820,1.4)}${cloud(820,830,1.3)}${cloud(500,880,1.5)}
+ <g data-bob="5,1.4">${adult(500,850,1.25,{rabat:true,hair:'#e0e0e0',longHair:true,halo:'data-in="L1+0.4" data-sfx="chime" data-pulse="0.08,3"'})}</g>
+ <g data-in="L0+0.4" data-sfx="pop">${badge(500,100,560,80,'7 de abril de 1719 · Ruan','#25408f','#fff',44)}</g>
+ <g data-in="L1+0.6" data-sfx="ding"><g transform="translate(170,330)"><path d="M-30,-120 L-10,-40 L10,-40 L30,-120Z" fill="#e53935"/><circle r="80" fill="#ffd23f" stroke="#e0a800" stroke-width="8"/><text y="-6" text-anchor="middle" font-weight="800" font-size="46" fill="#7a4a10">1900</text><text y="38" text-anchor="middle" font-weight="800" font-size="34" fill="#7a4a10">Santo</text></g></g>
+ <g data-in="L1+3.2" data-sfx="ding"><g transform="translate(830,330)"><path d="M-30,-120 L-10,-40 L10,-40 L30,-120Z" fill="#25408f"/><circle r="80" fill="#ffd23f" stroke="#e0a800" stroke-width="8"/><text y="-6" text-anchor="middle" font-weight="800" font-size="46" fill="#7a4a10">1950</text><text y="36" text-anchor="middle" font-weight="800" font-size="28" fill="#7a4a10">Patrono</text></g>
+  ${badge(830,460,300,56,'de los educadores','#25408f','#fff',32)}</g>
+ <g data-in="L2+0.2" data-sfx="pop"><g transform="translate(500,250)"><rect x="-110" y="-100" width="220" height="210" rx="20" fill="#fff" stroke="#e53935" stroke-width="8"/><rect x="-110" y="-100" width="220" height="64" rx="18" fill="#e53935"/><text y="-52" text-anchor="middle" font-weight="800" font-size="40" fill="#fff">ABRIL</text><text y="86" text-anchor="middle" font-weight="800" font-size="120" fill="#24264a">7</text></g></g>
+ <g data-in="L2+0.3">${[...Array(26)].map((_,i)=>`<rect class="conf" data-fall="${(i*37)%1000},${(i*53)%600},${180+(i*29)%160}" width="16" height="26" rx="4" fill="${SHIRTS[i%7]}"/>`).join('')}</g>`;
+
+SC.pasado=()=>`<rect width="1000" height="930" fill="#5ec4e6"/>${[...Array(8)].map((_,i)=>`<path d="M${(i*137)%900+40},${150+(i*97)%560} q20,-12 40,0 q20,12 40,0" stroke="#fff" stroke-width="4" fill="none" opacity=".5"/>`).join('')}
+ ${CONT.map(land).join('')}
+ <g data-in="L0+0.4" data-sfx="ding"><g transform="translate(${MX(4)},${MY(49)})"><circle r="30" fill="#ffd23f" opacity=".5" data-pulse="0.3,3"/>${star(0,0,26,'#ffd23f','#e0a800',4)}</g>${badge(MX(4)+10,MY(49)-90,190,54,'Francia','#25408f','#fff',34)}</g>
+ <g data-stagger="L0+2.2,0.11">${PINS.map(([a,b])=>`<g>${star(MX(a),MY(b),15,'#ff6b6b','#fff',3)}</g>`).join('')}</g>
+ <g data-in="L1+0.2" data-sfx="chime"><g transform="translate(${MX(-3.7)},${MY(40.4)})"><circle r="30" fill="#ffd23f" opacity=".6" data-pulse="0.35,4"/>${star(0,0,30,'#ffd23f','#e53935',5)}</g>${badge(MX(-3.7)-120,MY(40.4)+120,300,70,'España · 1878','#e53935','#fff',40)}</g>
+ <g transform="translate(80,820)"><rect width="840" height="26" rx="13" fill="#fff" opacity=".7"/><rect class="prog" data-prog="0.5,E-0.6" width="840" height="26" rx="13" fill="#ffd23f"/>
+  ${[['1719',0],['1800',0.27],['1878',0.5],['1900',0.6],['Hoy',1]].map(([t,p])=>`<g><circle cx="${p*840}" cy="13" r="18" fill="#25408f" stroke="#fff" stroke-width="5"/><text x="${p*840}" y="-20" text-anchor="middle" font-weight="800" font-size="30" fill="#24264a">${t}</text></g>`).join('')}</g>`;
+
+SC.presente=()=>`${sky('g10','#ffa3bd','#ffe9f0')}
+ <g data-in="L0+0.2" data-sfx="pop"><rect x="40" y="40" width="430" height="230" rx="36" fill="#fff" stroke="#ff6b8b" stroke-width="8"/><text x="130" y="200" text-anchor="middle" font-size="110">🌍</text><text x="335" y="190" text-anchor="middle" font-weight="800" font-size="120" fill="#e53950" data-count="L0+0.4,1.6,0,80">0</text><text x="335" y="245" text-anchor="middle" font-weight="700" font-size="40" fill="#24264a">países</text></g>
+ <g data-in="L1+0.1" data-sfx="pop"><rect x="500" y="40" width="460" height="230" rx="36" fill="#fff" stroke="#8e5bd6" stroke-width="8"/><text x="730" y="160" text-anchor="middle" font-weight="800" font-size="84" fill="#8e5bd6" data-count="L1+0.3,2.2,0,1000000" data-plus="1">0</text><text x="730" y="222" text-anchor="middle" font-weight="700" font-size="40" fill="#24264a">alumnos</text></g>
+ <g data-stagger="L1+1.4,0.35"><text x="590" y="320" font-size="56" text-anchor="middle">🧸</text><text x="730" y="320" font-size="56" text-anchor="middle">🎒</text><text x="870" y="320" font-size="56" text-anchor="middle">🎓</text></g>
+ <g data-stagger="L2+0.3,0.12">${[...Array(7)].map((_,i)=>`<g>${i%2===0?adult(110+i*130,640,0.68,{rabat:true,hair:HAIRS[(i*2)%6],skin:SKINS[i%6]}):adult(110+i*130,640,0.68,{coat:SHIRTS[i%7],hair:HAIRS[i%6],skin:SKINS[(i+2)%6],dress:i%4===1,bun:i%4===1})}</g>`).join('')}</g>
+ <g data-in="L2+0.9"><path d="M135,555 h780" stroke="#24264a" stroke-width="0"/>${[...Array(6)].map((_,i)=>heart(175+i*130,590,0.35,'#ff4d6d','data-bob="5,4"')).join('')}</g>
+ <g data-in="L2+1.5" data-sfx="pop">${badge(500,680,560,66,'Juntos y por asociación','#24264a','#fff',40)}</g>
+ <g data-stagger="L3+1.8,0.45">${[['⭐','Fe','#25408f'],['🤝','Fraternidad','#4aa3ff'],['❤️','Servicio','#ff6b6b']].map(([e,t,c],i)=>`<g><circle cx="${190+i*310}" cy="800" r="66" fill="${c}" stroke="#fff" stroke-width="8"/><text x="${190+i*310}" y="823" text-anchor="middle" font-size="60">${e}</text><text x="${190+i*310}" y="900" text-anchor="middle" font-weight="800" font-size="38" fill="#24264a">${t}</text></g>`).join('')}</g>`;
+
+SC.futuro=()=>`${sky('g11','#7d6bff','#ffd6f5')}
+ ${[...Array(14)].map((_,i)=>`<circle cx="${(i*71)%1000}" cy="${30+(i*47)%260}" r="${2+i%3}" fill="#fff" data-twinkle="${i}"/>`).join('')}
+ <g data-in="L2+0.5" data-anim="fade"><g transform="translate(500,520)">${['#ff6b6b','#ff9f43','#ffd23f','#2ecc71','#4aa3ff','#8e5bd6'].map((c,i)=>`<path d="M${-470+i*22},0 A${470-i*22},${380-i*22} 0 0 1 ${470-i*22},0" stroke="${c}" stroke-width="22" fill="none" opacity=".75"/>`).join('')}</g></g>
+ <path d="M0,740 Q500,660 1000,740 L1000,930 L0,930Z" fill="#7ed492"/>
+ <g transform="translate(860,700)"><rect x="-8" y="-300" width="16" height="300" fill="#fff"/><g transform="translate(0,-300)"><g data-spin="120">${[0,120,240].map(a=>`<path d="M0,0 L-12,-110 Q0,-130 12,-110Z" fill="#fff" stroke="#ddd" stroke-width="3" transform="rotate(${a})" style="transform-box:view-box;transform-origin:0 0"/>`).join('')}<circle r="14" fill="#ccc"/></g></g></g>
+ <g transform="translate(470,720)"><rect x="-280" y="-280" width="560" height="280" rx="40" fill="#fff" stroke="#b9b3ff" stroke-width="8"/><path d="M-280,-200 Q0,-380 280,-200" fill="#b9e3ff" stroke="#fff" stroke-width="8"/>
+  ${[-200,-80,40,160].map(x=>`<g transform="translate(${x},-325) skewX(-20)"><rect width="90" height="40" fill="#2b3a8f" stroke="#9ab0ff" stroke-width="3"/><path d="M30,0 v40 M60,0 v40 M0,20 h90" stroke="#9ab0ff" stroke-width="2"/></g>`).join('')}
+  ${[-190,-60,60,190].map(x=>`<rect x="${x-40}" y="-210" width="80" height="90" rx="16" fill="#8fd3ff"/>`).join('')}
+  <rect x="-50" y="-110" width="100" height="110" rx="20" fill="#7d6bff"/>${star(0,-250,26,'#ffd23f','#e0a800',3)}
+  ${tree(-330,0,0.6,'#43a047')}${tree(320,0,0.55,'#4caf50')}</g>
+ <g data-in="0.3" data-anim="up"><g transform="translate(120,640)" data-bob="10,2.4"><rect x="-45" y="-80" width="90" height="80" rx="20" fill="#cfd8dc" stroke="#90a4ae" stroke-width="5"/><circle cx="-18" cy="-45" r="12" fill="#4aa3ff"/><circle cx="18" cy="-45" r="12" fill="#4aa3ff"/><path d="M-16,-18 q16,12 32,0" stroke="#24264a" stroke-width="4" fill="none"/><path d="M0,-80 v-22" stroke="#90a4ae" stroke-width="5"/><circle cx="0" cy="-106" r="9" fill="#ff6b6b"/><rect x="-36" y="0" width="72" height="60" rx="14" fill="#b0bec5"/></g></g>
+ <g data-stagger="L0+0.6,0.18">${[0,1,2,3,4].map(i=>`<g data-bob="${i%2?14:18},${5+i*0.4}">${kid(170+i*165,925,0.78,{skin:SKINS[(i+1)%6],hair:HAIRS[(i+2)%6],shirt:SHIRTS[(i+2)%7],long:i%2===0,book:i===3?'#24264a':''})}</g>`).join('')}</g>
+ <g data-in="L0+1.5"><g transform="translate(830,880)"><circle cx="-30" cy="0" r="40" fill="none" stroke="#24264a" stroke-width="10"/><circle cx="-30" cy="0" r="8" fill="#24264a"/></g></g>
+ <g data-in="L1+0.3" data-sfx="pop"><circle cx="230" cy="190" r="80" fill="#fff" stroke="#4aa3ff" stroke-width="8"/><text x="230" y="215" text-anchor="middle" font-size="72">💻</text></g>
+ <g data-in="L1+1.4" data-sfx="pop"><circle cx="500" cy="140" r="80" fill="#fff" stroke="#2ecc71" stroke-width="8"/><text x="500" y="165" text-anchor="middle" font-size="72">🌱</text></g>
+ <g data-in="L1+2.6" data-sfx="pop"><circle cx="770" cy="190" r="80" fill="#fff" stroke="#ff6b6b" stroke-width="8"/><text x="770" y="215" text-anchor="middle" font-size="72">🤝</text></g>`;
+
+SC.cierre=()=>`<defs><radialGradient id="g12" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#3b5bc7"/><stop offset="1" stop-color="#141c4d"/></radialGradient></defs><rect width="1000" height="930" fill="url(#g12)"/>
+ ${[...Array(40)].map((_,i)=>`<circle cx="${(i*97)%1000}" cy="${(i*61)%930}" r="${2+i%3}" fill="#fff" data-twinkle="${i}"/>`).join('')}
+ <g transform="translate(500,340)"><g data-spin="12">${[...Array(16)].map((_,i)=>`<path d="M-20,0 L0,-420 L20,0Z" fill="#ffd23f" opacity=".18" transform="rotate(${i*22.5})" style="transform-box:view-box;transform-origin:0 0"/>`).join('')}</g>
+  <g data-in="0.3" data-sfx="ding" data-pulse="0.06,2.4">${star(0,0,170,'#ffd23f','#fff',10)}</g></g>
+ <text x="500" y="610" text-anchor="middle" font-weight="800" font-size="56" fill="#ffd23f" letter-spacing="6" data-in="0.9" data-anim="fade">SIGNUM FIDEI</text>
+ <g data-in="L1+0.2" data-anim="up" data-out="L2+2.4"><text x="500" y="700" text-anchor="middle" font-weight="700" font-size="54" fill="#fff">Viva Jesús en nuestros corazones…</text></g>
+ <g data-in="L2" data-sfx="chime" data-out="L2+2.4"><text x="500" y="810" text-anchor="middle" font-weight="800" font-size="104" fill="#fff" stroke="#ff6b6b" stroke-width="6" paint-order="stroke">¡Por siempre!</text></g>
+ <g data-in="L2+0.1">${[...Array(30)].map((_,i)=>`<rect class="conf" data-fall="${(i*37)%1000},${(i*53)%600},${200+(i*29)%160}" width="16" height="26" rx="4" fill="${SHIRTS[i%7]}"/>`).join('')}</g>
+ <g data-in="L2+2.6" data-anim="up"><rect x="70" y="640" width="860" height="250" rx="40" fill="#fff"/>
+  <text x="500" y="720" text-anchor="middle" font-weight="800" font-size="52" fill="#25408f">San Juan Bautista de La Salle</text>
+  <text x="500" y="790" text-anchor="middle" font-weight="700" font-size="44" fill="#e53950">1651 – 1719</text>
+  <text x="500" y="852" text-anchor="middle" font-weight="700" font-size="38" fill="#24264a">Patrono universal de los educadores</text></g>`;
+
+const BG={intro:['#8fd3ff','#dff4ff'],nacimiento:['#ffb48a','#ffe3c7'],joven:['#c9b6ff','#efe8ff'],pobres:['#a7b4c2','#e3e8ee'],casa:['#ffcf87','#fff1d6'],
+ fundacion:['#7fb3ff','#dcecff'],ideas:['#8fe3c0','#e6fff5'],santo:['#ffd86b','#fff6d1'],pasado:['#7fd6e8','#e2f8fc'],presente:['#ff9fb8','#ffe6ee'],futuro:['#9b8cff','#e3dfff'],cierre:['#1e3a8a','#3b5bc7']};
+const TCOL={intro:'#ff6b6b',nacimiento:'#e67e22',joven:'#8e5bd6',pobres:'#607d8b',casa:'#d35400',fundacion:'#25408f',ideas:'#2f6e55',santo:'#e0a800',pasado:'#1f8fb3',presente:'#e53950',futuro:'#6a4bd6',cierre:'#141c4d'};
+const WAVE={'intro:0':'L','intro:1':'M','futuro:0':'M','cierre:2':'LM'};
+
+/* ---------- montaje ---------- */
+const panel=document.getElementById('panel');
+const scenes=TL.escenas.map(s=>{const el=document.createElementNS('http://www.w3.org/2000/svg','svg');el.setAttribute('viewBox','0 0 1000 930');el.classList.add('sc');
+ el.innerHTML=SC[s.id]();panel.appendChild(el);return Object.assign({},s,{el})});
+function tspec(spec,s){ if(spec==null||spec==='')return null;spec=String(spec);
+ let m=spec.match(/^L(\d+)([+-][\d.]+)?$/);if(m)return s.lineas[+m[1]].start-s.start+(+(m[2]||0));
+ m=spec.match(/^E([+-][\d.]+)?$/);if(m)return s.dur+(+(m[1]||0));return +spec;}
+const EVENTS=[];
+scenes.forEach((s,si)=>{
+ $('[data-stagger]',s.el).forEach(g=>{const [b,st]=g.dataset.stagger.split(',');const t0=tspec(b,s);[...g.children].forEach((c,i)=>{if(!c.dataset.in){c.dataset.in=(t0+i*(+st)).toFixed(3);c.dataset.anim=c.dataset.anim||'pop';c.dataset.sfx=c.dataset.sfx||'tick'}})});
+ // los elementos con transform propio se envuelven para no perder su posición al animarlos
+ $('[data-in],[data-out],[data-spin],[data-bob],[data-swing],[data-drift],[data-pulse],[data-shake],[data-twinkle]',s.el).forEach(el=>{
+  if(!el.hasAttribute('transform'))return;const w=document.createElementNS('http://www.w3.org/2000/svg','g');
+  el.parentNode.insertBefore(w,el);w.appendChild(el);
+  [...el.attributes].filter(a=>a.name.startsWith('data-')).forEach(a=>{w.setAttribute(a.name,a.value);el.removeAttribute(a.name)});});
+ $('[data-in],[data-out]',s.el).forEach(el=>{el._tin=el.dataset.in!=null?tspec(el.dataset.in,s):-1;el._tout=el.dataset.out!=null?tspec(el.dataset.out,s):1e9;
+   if(el.dataset.sfx)EVENTS.push({t:s.start+el._tin,k:el.dataset.sfx})});
+ $('[data-count]',s.el).forEach(el=>{const p=el.dataset.count.split(',');el._c=[tspec(p[0],s),+p[1],+p[2],+p[3]]});
+ $('[data-prog]',s.el).forEach(el=>{const p=el.dataset.prog.split(',');el._p=[tspec(p[0],s),tspec(p[1],s)]});
+ if(si>0)EVENTS.push({t:s.start,k:'whoosh'});
+ const SEL='[data-in],[data-out],[data-spin],[data-bob],[data-swing],[data-drift],[data-pulse],[data-shake],[data-twinkle]';
+ s._anim=$(SEL,s.el);
+ s._anim.forEach(el=>{if(!el.style.transformOrigin){el.style.transformBox='fill-box';el.style.transformOrigin='center'}});
+});
+window.EVENTS=EVENTS;window.TOTAL=TL.total;
+
+// decoración de fondo y flores
+const fl=document.getElementById('floaters');
+fl.innerHTML=[...Array(14)].map((_,i)=>`<g class="fl" data-i="${i}">${i%2?star(0,0,14+i%3*6,'#fff','none',0,'opacity=".55"'):`<circle r="${10+i%4*5}" fill="#fff" opacity=".35"/>`}</g>`).join('');
+document.getElementById('flowers').innerHTML=[...Array(12)].map((_,i)=>{const x=40+i*92+(i%2)*20,y=210+(i%3)*50,c=['#ff6b6b','#ffd23f','#fff','#ff8fd1'][i%4];
+ return `<g transform="translate(${x},${y})"><g class="flw" data-i="${i}">${[0,72,144,216,288].map(a=>`<ellipse cx="0" cy="-13" rx="9" ry="13" fill="${c}" transform="rotate(${a})" style="transform-box:view-box;transform-origin:0 0"/>`).join('')}<circle r="8" fill="#ffb300"/></g></g>`}).join('');
+
+const sub=document.getElementById('sub'),subtxt=document.getElementById('subtxt'),who=document.getElementById('who'),title=document.getElementById('title');
+let lastLine=null,lastScene=null;
+function setSub(line){
+ if(line===lastLine)return;lastLine=line;
+ if(!line){sub.style.opacity=0;return}
+ subtxt.innerHTML=line.text.split(' ').map(w=>`<span class="w">${w}</span>`).join(' ');
+ line._words=$('.w',subtxt);let acc=0;const L=line.text.length;line._words.forEach(w=>{w._p=(acc+w.textContent.length*0.3)/L;acc+=w.textContent.length+1});
+ who.textContent=NAME[line.who];who.style.background=COL[line.who];
+ who.style.left=line.who==='M'?'auto':'40px';who.style.right=line.who==='M'?'40px':'auto';
+ if(line.who==='A'){who.style.left='50%';who.style.right='auto';who.style.transform='translateX(-50%)'}else who.style.transform='';
+ sub.style.borderColor=COL[line.who];
+}
+function mouth(id,o,t){
+ const smile=document.getElementById(id+'-smile'),mo=document.getElementById(id+'-mo'),tg=document.getElementById(id+'-tg');
+ const cy=id==='L'?352:356;
+ if(o<0.06){smile.style.display='';mo.parentNode.style.display='none';return}
+ smile.style.display='none';mo.parentNode.style.display='';
+ const w=24+o*8,h=8+o*30;
+ mo.setAttribute('d',`M${250-w},${cy} Q250,${cy-6} ${250+w},${cy} Q250,${cy+h*1.6} ${250-w},${cy}Z`);
+ tg.setAttribute('cy',cy+h*0.55);tg.setAttribute('rx',w*0.5);tg.setAttribute('ry',Math.max(2,h*0.25));
+}
+function render(t){
+ const s=scenes.find(x=>t>=x.start&&t<x.start+x.dur)||(t<scenes[0].start?scenes[0]:scenes[scenes.length-1]);
+ const lt=t-s.start;
+ if(s!==lastScene){scenes.forEach(x=>x.el.style.display=x===s?'block':'none');
+  const prev=lastScene;lastScene=s;
+  document.getElementById('bgA').style.background=prev?`linear-gradient(${BG[prev.id][0]},${BG[prev.id][1]})`:'none';
+  document.getElementById('bgB').style.background=`linear-gradient(${BG[s.id][0]},${BG[s.id][1]})`;
+  title.textContent=s.titulo;title.style.background=TCOL[s.id];}
+ document.getElementById('bgB').style.opacity=clamp(lt/0.8);
+ // transición del panel
+ const pin=easeOutBack(clamp(lt/0.55)),pout=clamp((lt-(s.dur-0.3))/0.3);
+ const isLast=s===scenes[scenes.length-1];
+ const sc=s.el;sc.style.opacity=clamp(lt/0.25)*(isLast?1:1-pout);
+ sc.style.transform=`scale(${(0.92+0.08*pin)*(isLast?1:1-0.05*pout)})`;
+ title.style.transform=`translateX(-50%) scale(${easeOutBack(clamp(lt/0.5)).toFixed(3)}) rotate(${(Math.sin(t*2)*1.5).toFixed(2)}deg)`;
+ // animaciones de elementos
+ for(const el of s._anim){
+  let o=1,sx=1,dx=0,dy=0,rot=0;const d=el.dataset;
+  if(d.in!=null||d.out!=null){
+   const a=el._tin,b=el._tout;
+   if(lt<a){o=0;sx=0}else{const p=clamp((lt-a)/0.45),an=d.anim||'pop';o=clamp((lt-a)/0.2);
+    if(an==='pop')sx=easeOutBack(p);else if(an==='up')dy=(1-easeOut(p))*80;else if(an==='left')dx=(1-easeOut(p))*-120;else if(an==='right')dx=(1-easeOut(p))*300;}
+   if(lt>b){const q=clamp((lt-b)/0.3);o*=1-q;if((d.anim||'pop')==='pop')sx*=1-q*0.4}
+  }
+  if(d.bob){const[a,f]=d.bob.split(',').map(Number);dy+=Math.sin(t*f+(el._ph??=Math.random()*6))*a}
+  if(d.spin)rot+=t*(+d.spin);
+  if(d.swing){const[a,f]=d.swing.split(',').map(Number);rot+=Math.sin(t*f)*a}
+  if(d.drift){dx+=lt*(+d.drift);}
+  if(d.pulse){const[a,f]=d.pulse.split(',').map(Number);sx*=1+Math.sin(t*f*2)*a}
+  if(d.shake&&lt>=el._tin)dx+=Math.sin(lt*45)*6*(lt<el._tout?1:0);
+  if(d.twinkle!=null){o*=0.35+0.65*Math.abs(Math.sin(t*1.3+(+d.twinkle)))}
+  el.style.opacity=o.toFixed(3);
+  el.style.transform=`translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) rotate(${rot.toFixed(2)}deg) scale(${Math.max(0,sx).toFixed(4)})`;
+ }
+ $('[data-count]',sc).forEach(el=>{const[a,dur,f0,f1]=el._c;const p=easeOut(clamp((lt-a)/dur));let v=Math.round(f0+(f1-f0)*p);
+  el.textContent=v.toLocaleString('es-ES')+(el.dataset.plus&&p>=1?'+':'')});
+ $('[data-prog]',sc).forEach(el=>{const[a,b]=el._p;el.setAttribute('width',(840*clamp((lt-a)/(b-a))).toFixed(1))});
+ $('.fly',sc).forEach(el=>{const[x0,y0,x1,y1,h,per,ph]=el.dataset.fly.split(',').map(Number);const st=el.parentNode._tin;
+  const p=(((lt-st)/per+ph)%1+1)%1;const x=x0+(x1-x0)*p,y=y0+(y1-y0)*p-h*4*p*(1-p);
+  el.setAttribute('transform',`translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${(p*360).toFixed(0)})`);el.style.opacity=lt<st?0:clamp(Math.min(p,1-p)*8)});
+ $('.conf',sc).forEach(el=>{const[x,off,sp]=el.dataset.fall.split(',').map(Number);const st=el.parentNode._tin;const y=((lt-st)*sp+off)%1000-60;
+  el.setAttribute('transform',`translate(${(x+Math.sin(lt*2+off)*30).toFixed(1)},${y.toFixed(1)}) rotate(${((lt*200+off)%360).toFixed(0)})`)});
+ // fondo
+ $('.fl',fl).forEach(g=>{const i=+g.dataset.i;const x=(i*157+t*(12+i%5*4))%1180-50,y=1980-(((t*(22+i%4*8))+i*150)%2100);
+  g.setAttribute('transform',`translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${(t*30+i*20)%360})`)});
+ $('.flw').forEach(g=>{const i=+g.dataset.i;g.setAttribute('transform',`rotate(${(Math.sin(t*1.5+i)*12).toFixed(1)})`)});
+ // frase actual, subtítulos y bocas
+ const lines=s.lineas;let cur=null,open={L:0,M:0},spk={L:false,M:false};
+ for(const ln of lines){if(t>=ln.start-0.1)cur=ln;}
+ setSub(cur);
+ if(cur){sub.style.opacity=1;const p=clamp((t-cur.start)/cur.dur);cur._words.forEach(w=>w.classList.toggle('on',w._p<=p));
+  const k=Math.floor((t-cur.start)*TL.fps);
+  for(const g in cur.env){if(k>=0&&k<cur.env[g].length){const e=cur.env[g];open[g]=(e[k]+(e[k+1]??e[k]))/2;spk[g]=true}}
+  const sp=clamp((t-cur.start+0.1)/0.25);sub.style.transform=cur===lines[0]&&t<cur.start+0.4?`scale(${easeOutBack(sp)})`:'scale(1)';}
+ else sub.style.opacity=0;
+ mouth('L',open.L,t);mouth('M',open.M,t);
+ // cuerpo de las niñas
+ const wave=cur&&t<cur.start+cur.dur+0.3?WAVE[s.id+':'+lines.indexOf(cur)]||'':'';
+ for(const g of ['L','M']){
+  const el=document.getElementById('g'+g);const talking=spk[g];
+  const bob=talking?Math.abs(Math.sin(t*6))*8:Math.sin(t*1.6+(g==='M'?1.5:0))*3;
+  el.style.transform=`translateY(${(-bob).toFixed(1)}px) rotate(${(Math.sin(t*1.2+(g==='M'?2:0))*(talking?2.2:1)).toFixed(2)}deg) scale(${talking?1.03:1})`;
+  // parpadeo
+  const per=g==='L'?3.9:4.6,off=g==='L'?0.3:1.9;const bl=((t+off)%per)<0.13;
+  $('#'+g+'-eyes > g').forEach(e=>e.style.transform=bl?'scaleY(0.1)':'');
+  const w=document.getElementById(g+'-wave');const wv=wave.includes(g);
+  w.style.display=wv?'':'none';
+  if(wv)w.style.transform=`rotate(${(Math.sin(t*9)*(g==='L'?-14:14)).toFixed(1)}deg)`;
+  document.getElementById('tag'+g).style.transform=`scale(${talking?1.12:1})`;
+ }
+ document.getElementById('L-pony').style.transform=`rotate(${(Math.sin(t*3.2)*7).toFixed(2)}deg)`;
+ // fundido de entrada/salida
+ const fd=document.getElementById('fade');fd.style.background=t<5?'#fff':'#141c4d';
+ fd.style.opacity=Math.max(clamp(1-t/0.6),clamp((t-(TL.total-1.0))/1.0)).toFixed(3);
+}
+window.render=render;render(0);
+</script></body></html>
