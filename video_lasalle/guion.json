@@ -1,66 +1,233 @@
 {
-  "_notas": "L = Lucía (rubia, coleta) · M = Marta (morena, pelo suelto y flequillo) · A = ambas. 'tts' es la grafía fonética que se envía al sintetizador; 'text' es el subtítulo.",
+  "_notas": "L = Ángeles (rubia, coleta) · M = Natalia (morena, pelo suelto y flequillo) · A = ambas. 'tts' es la grafía fonética que se envía al sintetizador; 'text' es el subtítulo.",
   "escenas": [
-    {"id": "intro", "titulo": "¡Hola!", "lineas": [
-      {"who": "L", "text": "¡Hola! Soy Lucía."},
-      {"who": "M", "text": "¡Y yo soy Marta! Tenemos diez años y estudiamos en un cole La Salle.", "tts": "¡Y yo soy Marta! Tenemos diez años y estudiamos en un cole La Sal."},
-      {"who": "L", "text": "Hoy os vamos a contar la historia de alguien muy especial…"},
-      {"who": "M", "text": "¡San Juan Bautista de La Salle! ¿Nos acompañáis?", "tts": "¡San Juan Bautista de La Sal! ¿Nos acompañáis?"}
-    ]},
-    {"id": "nacimiento", "titulo": "1651 · Reims, Francia", "lineas": [
-      {"who": "L", "text": "Juan Bautista nació hace muchísimo tiempo, en 1651, en la ciudad de Reims, en Francia.", "tts": "Juan Bautista nació hace muchísimo tiempo, en mil seiscientos cincuenta y uno, en la ciudad de Rens, en Francia."},
-      {"who": "M", "text": "Era el mayor de once hermanos. ¡Imagínate qué casa tan llena!"},
-      {"who": "L", "text": "Su familia era rica, y él lo tenía todo."}
-    ]},
-    {"id": "joven", "titulo": "Un joven estudioso", "lineas": [
-      {"who": "M", "text": "Le encantaba estudiar y rezar. ¡Con solo dieciséis años ya era canónigo de la catedral!"},
-      {"who": "L", "text": "Pero siendo joven, sus padres murieron, y tuvo que cuidar de sus hermanos pequeños."},
-      {"who": "M", "text": "Más tarde se hizo sacerdote y doctor en Teología."}
-    ]},
-    {"id": "pobres", "titulo": "Niños sin escuela", "lineas": [
-      {"who": "L", "text": "En aquella época, muchos niños pobres no podían ir a la escuela."},
-      {"who": "M", "text": "Pasaban el día en la calle, sin aprender a leer ni a escribir."},
-      {"who": "L", "text": "En 1679 conoció a Adrián Nyel, que quería abrir escuelas para ellos. ¡Y Juan Bautista decidió ayudarle!", "tts": "En mil seiscientos setenta y nueve conoció a Adrián Niel, que quería abrir escuelas para ellos. ¡Y Juan Bautista decidió ayudarle!"}
-    ]},
-    {"id": "casa", "titulo": "Lo dio todo", "lineas": [
-      {"who": "M", "text": "Los maestros no sabían bien cómo enseñar, así que se los llevó a vivir a su propia casa para formarlos."},
-      {"who": "L", "text": "¡A su familia no le gustó nada! Pero él siguió adelante."},
-      {"who": "M", "text": "Dejó su puesto en la catedral y repartió su dinero entre los pobres en una época de hambre."}
-    ]},
-    {"id": "fundacion", "titulo": "1684 · Nacen los Hermanos", "lineas": [
-      {"who": "L", "text": "Y en 1684, con aquellos maestros, fundó los Hermanos de las Escuelas Cristianas.", "tts": "Y en mil seiscientos ochenta y cuatro, con aquellos maestros, fundó los Hermanos de las Escuelas Cristianas."},
-      {"who": "M", "text": "Personas que dedicaban toda su vida a enseñar, sobre todo a los niños más pobres. ¡Y gratis!"}
-    ]},
-    {"id": "ideas", "titulo": "Ideas revolucionarias", "lineas": [
-      {"who": "L", "text": "¡Sus ideas eran revolucionarias! Enseñar en francés, el idioma de los niños, y no en latín."},
-      {"who": "M", "text": "Agrupar a los alumnos en clases según su nivel, como hacemos hoy."},
-      {"who": "L", "text": "Crear escuelas para formar a los maestros. ¡Fue de los primeros!"},
-      {"who": "M", "text": "Y hasta abrió escuelas los domingos, para los chicos que trabajaban entre semana."}
-    ]},
-    {"id": "santo", "titulo": "Un santo para los educadores", "lineas": [
-      {"who": "L", "text": "Murió el 7 de abril de 1719, un Viernes Santo, en Ruan.", "tts": "Murió el siete de abril de mil setecientos diecinueve, un Viernes Santo, en Ruan."},
-      {"who": "M", "text": "En 1900 fue declarado santo, y en 1950, patrono universal de los educadores.", "tts": "En mil novecientos fue declarado santo, y en mil novecientos cincuenta, patrono universal de los educadores."},
-      {"who": "L", "text": "¡Por eso celebramos su fiesta cada 7 de abril!", "tts": "¡Por eso celebramos su fiesta cada siete de abril!"}
-    ]},
-    {"id": "pasado", "titulo": "Pasado · Por todo el mundo", "lineas": [
-      {"who": "M", "text": "Los Hermanos siguieron su sueño, y las escuelas La Salle se extendieron por Francia… ¡y por todo el mundo!", "tts": "Los Hermanos siguieron su sueño, y las escuelas La Sal se extendieron por Francia… ¡y por todo el mundo!"},
-      {"who": "L", "text": "A España llegaron en 1878, y desde entonces no han parado de crecer.", "tts": "A España llegaron en mil ochocientos setenta y ocho, y desde entonces no han parado de crecer."}
-    ]},
-    {"id": "presente", "titulo": "Presente · La Salle hoy", "lineas": [
-      {"who": "M", "text": "Hoy, La Salle está en unos 80 países…", "tts": "Hoy, La Sal está en unos ochenta países…"},
-      {"who": "L", "text": "¡Con más de un millón de alumnos, desde Infantil hasta la universidad!"},
-      {"who": "M", "text": "Y los Hermanos no están solos: miles de profesores trabajan con ellos, juntos y por asociación."},
-      {"who": "L", "text": "Todos compartimos tres valores: fe, fraternidad y servicio."}
-    ]},
-    {"id": "futuro", "titulo": "Futuro · ¡Somos nosotros!", "lineas": [
-      {"who": "M", "text": "¿Y el futuro? ¡El futuro somos nosotros!"},
-      {"who": "L", "text": "Escuelas con nuevas tecnologías, que cuidan el planeta y donde nadie se queda atrás."},
-      {"who": "M", "text": "Porque su sueño sigue vivo: que todos los niños y niñas del mundo puedan aprender."}
-    ]},
-    {"id": "cierre", "titulo": "Signum Fidei", "lineas": [
-      {"who": "L", "text": "Y ahora, como decimos en La Salle…", "tts": "Y ahora, como decimos en La Sal…"},
-      {"who": "M", "text": "Viva Jesús en nuestros corazones…"},
-      {"who": "A", "text": "¡Por siempre!"}
-    ]}
+    {
+      "id": "intro",
+      "titulo": "¡Hola!",
+      "lineas": [
+        {
+          "who": "L",
+          "text": "¡Hola! Soy Ángeles."
+        },
+        {
+          "who": "M",
+          "text": "¡Y yo soy Natalia! Tenemos diez años y estudiamos en un cole La Salle."
+        },
+        {
+          "who": "L",
+          "text": "Hoy os vamos a contar la historia de alguien muy especial…"
+        },
+        {
+          "who": "M",
+          "text": "¡San Juan Bautista de La Salle! ¿Nos acompañáis?"
+        }
+      ]
+    },
+    {
+      "id": "nacimiento",
+      "titulo": "1651 · Reims, Francia",
+      "lineas": [
+        {
+          "who": "L",
+          "text": "Juan Bautista nació hace muchísimo tiempo, en 1651, en la ciudad de Reims, en Francia.",
+          "tts": "Juan Bautista nació hace muchísimo tiempo, en mil seiscientos cincuenta y uno, en la ciudad de Rens, en Francia."
+        },
+        {
+          "who": "M",
+          "text": "Era el mayor de once hermanos. ¡Imagínate qué casa tan llena!"
+        },
+        {
+          "who": "L",
+          "text": "Su familia era rica, y él lo tenía todo."
+        }
+      ]
+    },
+    {
+      "id": "joven",
+      "titulo": "Un joven estudioso",
+      "lineas": [
+        {
+          "who": "M",
+          "text": "Le encantaba estudiar y rezar. ¡Con solo dieciséis años ya era canónigo de la catedral!"
+        },
+        {
+          "who": "L",
+          "text": "Pero siendo joven, sus padres murieron, y tuvo que cuidar de sus hermanos pequeños."
+        },
+        {
+          "who": "M",
+          "text": "Más tarde se hizo sacerdote y doctor en Teología."
+        }
+      ]
+    },
+    {
+      "id": "pobres",
+      "titulo": "Niños sin escuela",
+      "lineas": [
+        {
+          "who": "L",
+          "text": "En aquella época, muchos niños pobres no podían ir a la escuela."
+        },
+        {
+          "who": "M",
+          "text": "Pasaban el día en la calle, sin aprender a leer ni a escribir."
+        },
+        {
+          "who": "L",
+          "text": "En 1679 conoció a Adrián Nyel, que quería abrir escuelas para ellos. ¡Y Juan Bautista decidió ayudarle!",
+          "tts": "En mil seiscientos setenta y nueve conoció a Adrián Niel, que quería abrir escuelas para ellos. ¡Y Juan Bautista decidió ayudarle!"
+        }
+      ]
+    },
+    {
+      "id": "casa",
+      "titulo": "Lo dio todo",
+      "lineas": [
+        {
+          "who": "M",
+          "text": "Los maestros no sabían bien cómo enseñar, así que se los llevó a vivir a su propia casa para formarlos."
+        },
+        {
+          "who": "L",
+          "text": "¡A su familia no le gustó nada! Pero él siguió adelante."
+        },
+        {
+          "who": "M",
+          "text": "Dejó su puesto en la catedral y repartió su dinero entre los pobres en una época de hambre."
+        }
+      ]
+    },
+    {
+      "id": "fundacion",
+      "titulo": "1684 · Nacen los Hermanos",
+      "lineas": [
+        {
+          "who": "L",
+          "text": "Y en 1684, con aquellos maestros, fundó los Hermanos de las Escuelas Cristianas.",
+          "tts": "Y en mil seiscientos ochenta y cuatro, con aquellos maestros, fundó los Hermanos de las Escuelas Cristianas."
+        },
+        {
+          "who": "M",
+          "text": "Personas que dedicaban toda su vida a enseñar, sobre todo a los niños más pobres. ¡Y gratis!"
+        }
+      ]
+    },
+    {
+      "id": "ideas",
+      "titulo": "Ideas revolucionarias",
+      "lineas": [
+        {
+          "who": "L",
+          "text": "¡Sus ideas eran revolucionarias! Enseñar en francés, el idioma de los niños, y no en latín."
+        },
+        {
+          "who": "M",
+          "text": "Agrupar a los alumnos en clases según su nivel, como hacemos hoy."
+        },
+        {
+          "who": "L",
+          "text": "Crear escuelas para formar a los maestros. ¡Fue de los primeros!"
+        },
+        {
+          "who": "M",
+          "text": "Y hasta abrió escuelas los domingos, para los chicos que trabajaban entre semana."
+        }
+      ]
+    },
+    {
+      "id": "santo",
+      "titulo": "Un santo para los educadores",
+      "lineas": [
+        {
+          "who": "L",
+          "text": "Murió el 7 de abril de 1719, un Viernes Santo, en Ruan.",
+          "tts": "Murió el siete de abril de mil setecientos diecinueve, un Viernes Santo, en Ruan."
+        },
+        {
+          "who": "M",
+          "text": "En 1900 fue declarado santo, y en 1950, patrono universal de los educadores.",
+          "tts": "En mil novecientos fue declarado santo, y en mil novecientos cincuenta, patrono universal de los educadores."
+        },
+        {
+          "who": "L",
+          "text": "¡Por eso celebramos su fiesta cada 7 de abril!",
+          "tts": "¡Por eso celebramos su fiesta cada siete de abril!"
+        }
+      ]
+    },
+    {
+      "id": "pasado",
+      "titulo": "Pasado · Por todo el mundo",
+      "lineas": [
+        {
+          "who": "M",
+          "text": "Los Hermanos siguieron su sueño, y las escuelas La Salle se extendieron por Francia… ¡y por todo el mundo!"
+        },
+        {
+          "who": "L",
+          "text": "A España llegaron en 1878, y desde entonces no han parado de crecer.",
+          "tts": "A España llegaron en mil ochocientos setenta y ocho, y desde entonces no han parado de crecer."
+        }
+      ]
+    },
+    {
+      "id": "presente",
+      "titulo": "Presente · La Salle hoy",
+      "lineas": [
+        {
+          "who": "M",
+          "text": "Hoy, La Salle está en unos 80 países…",
+          "tts": "Hoy, La Salle está en unos ochenta países…"
+        },
+        {
+          "who": "L",
+          "text": "¡Con más de un millón de alumnos, desde Infantil hasta la universidad!"
+        },
+        {
+          "who": "M",
+          "text": "Y los Hermanos no están solos: miles de profesores trabajan con ellos, juntos y por asociación."
+        },
+        {
+          "who": "L",
+          "text": "Todos compartimos tres valores: fe, fraternidad y servicio."
+        }
+      ]
+    },
+    {
+      "id": "futuro",
+      "titulo": "Futuro · ¡Somos nosotros!",
+      "lineas": [
+        {
+          "who": "M",
+          "text": "¿Y el futuro? ¡El futuro somos nosotros!"
+        },
+        {
+          "who": "L",
+          "text": "Escuelas con nuevas tecnologías, que cuidan el planeta y donde nadie se queda atrás."
+        },
+        {
+          "who": "M",
+          "text": "Porque su sueño sigue vivo: que todos los niños y niñas del mundo puedan aprender."
+        }
+      ]
+    },
+    {
+      "id": "cierre",
+      "titulo": "Signum Fidei",
+      "lineas": [
+        {
+          "who": "L",
+          "text": "Y ahora, como decimos en La Salle…"
+        },
+        {
+          "who": "M",
+          "text": "Viva Jesús en nuestros corazones…"
+        },
+        {
+          "who": "A",
+          "text": "¡Por siempre!"
+        }
+      ]
+    }
   ]
 }

@@ -1,4 +1,4 @@
-"""Genera las voces de Lucía y Marta y la línea de tiempo del vídeo.
+"""Genera las voces de Ángeles y Natalia y la línea de tiempo del vídeo.
 
 Uso: [MOTOR=edge|kokoro] python3 voces.py <dir_modelos> <dir_salida>
   edge (por defecto): voces neuronales de Microsoft vía edge-tts (requiere acceso a speech.platform.bing.com)
@@ -18,8 +18,8 @@ if MOTOR == "edge":
     import edge_tts
     # Cada niña tiene su propia voz; se sube el tono y algo los formantes para que suene infantil
     VOCES = {
-        "L": dict(voice="es-ES-XimenaNeural", rate="+12%", pitch="+22Hz", shift=1.07),  # Lucía
-        "M": dict(voice="es-ES-ElviraNeural", rate="+8%", pitch="+30Hz", shift=1.08),  # Marta
+        "L": dict(voice="es-ES-XimenaNeural", rate="+12%", pitch="+22Hz", shift=1.07),  # Ángeles
+        "M": dict(voice="es-ES-ElviraNeural", rate="+8%", pitch="+30Hz", shift=1.08),  # Natalia
     }
 
     def voz_cruda(who, txt, wav):
